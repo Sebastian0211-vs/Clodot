@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cglap038n4bos"]
 
-[ext_resource type="Script" uid="uid://cp4jesfs124a7" path="res://scenes/game/player/bars/hungry.gd" id="1_qdk2f"]
+[ext_resource type="Script" uid="uid://cp4jesfs124a7" path="res://scenes/game/player/ui/hungry.gd" id="1_qdk2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp0ge"]
 bg_color = Color(0, 0, 0, 1)

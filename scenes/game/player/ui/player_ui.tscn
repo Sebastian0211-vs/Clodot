@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bc43w1ey46qxm"]
+
+[ext_resource type="PackedScene" uid="uid://7xuelvaiab3k" path="res://scenes/game/player/ui/thirsty.tscn" id="1_xc8ec"]
+[ext_resource type="PackedScene" uid="uid://cglap038n4bos" path="res://scenes/game/player/ui/hungry.tscn" id="2_4kqf1"]
+[ext_resource type="PackedScene" uid="uid://bf68lt4dosq46" path="res://scenes/game/player/ui/stamina.tscn" id="3_xf5fp"]
+[ext_resource type="PackedScene" uid="uid://dkx7r1e841q6g" path="res://scenes/game/player/ui/money.tscn" id="4_o1hmr"]
+
+[node name="PlayerUi" type="Control" unique_id=1507388174]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ThirstyBar" parent="." unique_id=1184500359 instance=ExtResource("1_xc8ec")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 25.0
+offset_right = 75.0
+offset_bottom = 35.0
+
+[node name="HungryBar" parent="." unique_id=1272509161 instance=ExtResource("2_4kqf1")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 75.0
+offset_bottom = 50.0
+
+[node name="StaminaBar" parent="." unique_id=1172983455 instance=ExtResource("3_xf5fp")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = 75.0
+offset_bottom = 65.0
+
+[node name="money" parent="." unique_id=2010759718 instance=ExtResource("4_o1hmr")]
+layout_mode = 1
+offset_left = 147.0
+offset_top = -1.0
+offset_right = 147.0
+offset_bottom = -1.0

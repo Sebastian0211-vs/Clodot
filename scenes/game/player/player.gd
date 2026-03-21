@@ -6,15 +6,19 @@ var time = 0.0
 @onready var thirstyBar = $PlayerUi/ThirstyBar
 @onready var hungryBar = $PlayerUi/HungryBar
 @onready var staminaBar = $PlayerUi/StaminaBar
+@onready var moneyLabel = $PlayerUi/money/money_label
+@onready var moneyBackground = $PlayerUi/money/money_background
 
 var thirsty = 0
 var hungry = 0
 var stamina = 0
+var moneyIndicator = 0.0
 
 func _ready():
 	thirsty = 100
 	hungry = 100
 	stamina = 100
+	moneyIndicator = 0.0
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)
@@ -35,6 +39,7 @@ func update_attributes(delta: float):
 	_set_thirsty(delta)
 	_set_hungry(delta)
 	_set_stamina(delta)
+	_set_money(delta)
 
 func _set_thirsty(delta: float):
 	thirsty -= THIRSTFACTOR * delta
@@ -50,6 +55,11 @@ func _set_stamina(delta: float):
 	stamina -= STAMINAFACTOR * delta
 	staminaBar.set_stamina(stamina)
 	staminaBar.stamina = stamina
+	
+func _set_money(delta: float):
+	#moneyIndicator += 1
+	moneyLabel.text = str(moneyIndicator)
+	moneyBackground.text = str(moneyIndicator)
 
 enum direction{
 	UP,
@@ -112,7 +122,7 @@ var phase_offset_x = 0.0
 var phase_offset_y = 0.0
 
 var FREQUENCY = 3.0
-var INTENSITY = 20.0
+var INTENSITY = 10.0
 
 func _calc_phase_x():
 	phase_offset_x = asin(clamp($AnimatedSprite2D.position.x / INTENSITY, -1.0, 1.0)) - time * FREQUENCY

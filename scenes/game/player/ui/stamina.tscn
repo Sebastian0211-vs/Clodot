@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://7xuelvaiab3k"]
+[gd_scene format=3 uid="uid://bf68lt4dosq46"]
 
-[ext_resource type="Script" uid="uid://uls8ek2taesx" path="res://scenes/game/player/bars/thirsty.gd" id="1_jwr8l"]
+[ext_resource type="Script" uid="uid://8e4du1j82umj" path="res://scenes/game/player/ui/stamina.gd" id="1_rdvfw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp0ge"]
 bg_color = Color(0, 0, 0, 1)
@@ -10,16 +10,16 @@ expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwr8l"]
-bg_color = Color(0.54901963, 0.7764706, 0.9019608, 1)
+bg_color = Color(0.96862745, 0.94509804, 0.62352943, 1)
 
-[node name="Thirsty" type="ProgressBar" unique_id=1184500359]
+[node name="Stamina" type="ProgressBar" unique_id=1184500359]
 offset_right = 240.0
 offset_bottom = 4.0
 theme_override_styles/background = SubResource("StyleBoxFlat_pp0ge")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jwr8l")
 value = 60.0
 show_percentage = false
-script = ExtResource("1_jwr8l")
+script = ExtResource("1_rdvfw")
 
 [node name="Timer" type="Timer" parent="." unique_id=763920526]
 
