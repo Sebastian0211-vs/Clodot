@@ -106,11 +106,37 @@ func _play(filename: String) -> void:
 
 signal phoneme_played(label: String)
 
+var history: Array = []
+var time_since_last_input = 0.0
+var RESET_DELAY = 3.0
+
+signal history_reset
+signal history_updated(current: Array)
+
+func _process(delta: float) -> void:
+	if history.size() > 0:
+		time_since_last_input += delta
+		if time_since_last_input >= RESET_DELAY:
+			history.clear()
+			time_since_last_input = 0.0
+			emit_signal("history_reset")
+			print("[InputManager] HISTORY RESETED")
+
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var keycode: int = event.keycode
 	if key_map.has(keycode):
 		var entry = key_map[keycode]
+		history.append(entry["label"])
+		time_since_last_input = 0.0  # reset le timer à chaque touche
+		print("[InputManager] Current sentence: ", "".join(history))
 		_play(entry["file"])
-		emit_signal("phoneme_played", entry["label"])  # ← une seule fois ici
+		emit_signal("phoneme_played", entry["label"])
+		emit_signal("history_updated", history)
+
+func check_phrase(target: Array) -> bool:
+	return history == target
+
+func check_phrase_str(target: String) -> bool:
+	return "".join(history) == target

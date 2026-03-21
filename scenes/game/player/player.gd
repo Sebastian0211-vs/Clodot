@@ -8,7 +8,6 @@ var time = 0.0
 @onready var staminaBar = $PlayerUi/StaminaBar
 @onready var moneyLabel = $PlayerUi/money/money_label
 @onready var moneyBackground = $PlayerUi/money/money_background
-@onready 
 
 var thirsty = 0
 var hungry = 0
@@ -36,9 +35,9 @@ func _on_phoneme_played(label: String):
 	fl.init(label)
 	
 #PER SECONDS
-var THIRSTFACTOR = 5
-var HUNGERFACTOR = 10
-var STAMINAFACTOR = 1
+var THIRSTFACTOR = 0.1
+var HUNGERFACTOR = 0.1
+var STAMINAFACTOR = 0.1
 	
 func _process(delta: float) -> void:
 	time += delta
@@ -272,6 +271,9 @@ func move(delta: float):
 			$AnimatedSprite2D.play("down_right")
 
 		direction.IDLE_UP:
+			#LE CHECK POUR CHECK PHRASE
+			#if InputManager.check_phrase_str("ba na na"):
+			#	print("bravo !")
 			_reset()
 			$AnimatedSprite2D.play("idle_up")
 			
