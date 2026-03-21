@@ -11,6 +11,7 @@ expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwr8l"]
 bg_color = Color(0.8862745, 0.67058825, 0.7294118, 1)
+corner_detail = 7
 
 [node name="Hungry" type="ProgressBar" unique_id=1184500359]
 offset_right = 240.0

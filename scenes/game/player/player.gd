@@ -19,24 +19,37 @@ func _ready():
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)
 	
-var THIRSTFACTOR = 0.05
-var HUNGERFACTOR = 0.1
-var STAMINAFACTOR = 0.01
+#PER SECONDS
+var THIRSTFACTOR = 5
+var HUNGERFACTOR = 10
+var STAMINAFACTOR = 1
 	
-func _set_thirsty():
-	thirsty = thirsty - THIRSTFACTOR
+func _process(delta: float) -> void:
+	time += delta
+	update_attributes(delta)
+	get_input()
+	set_direction()
+	move(delta)
+
+func update_attributes(delta: float):
+	_set_thirsty(delta)
+	_set_hungry(delta)
+	_set_stamina(delta)
+
+func _set_thirsty(delta: float):
+	thirsty -= THIRSTFACTOR * delta
 	thirstyBar.set_thirsty(thirsty)
 	thirstyBar.thirsty = thirsty
 	
-func _set_hungry():
-	hungry = hungry - HUNGERFACTOR
+func _set_hungry(delta: float):
+	hungry -= HUNGERFACTOR * delta
 	hungryBar.set_hungry(hungry)
-	hungryBar.hungry= hungry
+	hungryBar.hungry = hungry
 	
-func _set_stamina():
-	stamina = stamina - STAMINAFACTOR
+func _set_stamina(delta: float):
+	stamina -= STAMINAFACTOR * delta
 	staminaBar.set_stamina(stamina)
-	staminaBar.stamina= stamina
+	staminaBar.stamina = stamina
 
 enum direction{
 	UP,
@@ -53,18 +66,6 @@ var KEY_UP = false
 var KEY_DOWN = false
 var KEY_LEFT = false
 var KEY_RIGHT = false
-
-func _process(delta: float) -> void:
-	time += delta
-	update_attributes()
-	get_input()
-	set_direction()
-	move(delta)
-
-func update_attributes():
-	_set_thirsty()
-	_set_hungry()
-	_set_stamina()
 
 func get_input():
 	if Input.is_action_pressed("up"): KEY_UP = true
