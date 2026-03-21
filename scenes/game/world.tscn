@@ -21,6 +21,8 @@ func _process(delta: float) -> void:
 	pass
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1nur"]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q5tta"]
 texture = ExtResource("3_w1nur")
 texture_region_size = Vector2i(32, 16)
@@ -71,6 +73,8 @@ z_index = 1
 collision_layer = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=874014751]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player" unique_id=1845899761]
+shape = SubResource("RectangleShape2D_w1nur")
 
 [node name="BaseMap" parent="." unique_id=1002856617 instance=ExtResource("1_g5t8f")]
 y_sort_enabled = true
