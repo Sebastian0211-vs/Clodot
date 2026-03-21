@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 InputManager="*uid://gkf1by0jiklb"
+InvShop="*uid://baa37w5dl3xyv"
 
 [display]
 

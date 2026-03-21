@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://uofkpa6rrqyn"]
+
+[ext_resource type="Texture2D" uid="uid://c6q3wsdpc6bry" path="res://icon.svg" id="1_8nykq"]
+[ext_resource type="Script" uid="uid://m1k2s7dmvygu" path="res://scenes/game/shops/Interaction.gd" id="1_wet2j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wet2j"]
+
+[node name="Interaction" type="Area2D" unique_id=1654841734]
+script = ExtResource("1_wet2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1878270808]
+shape = SubResource("RectangleShape2D_wet2j")
+
+[node name="Indicator" type="Sprite2D" parent="." unique_id=1151145221]
+visible = false
+position = Vector2(0, -16)
+scale = Vector2(0.14453125, 0.12890626)
+texture = ExtResource("1_8nykq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
