@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dkx7r1e841q6g"]
+
+[node name="money" type="Control" unique_id=2010759718]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="money_label" type="Label" parent="." unique_id=1317007437]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 23.0
+offset_right = 128.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.96862745, 0.94509804, 0.62352943, 1)
+theme_override_font_sizes/font_size = 15
+text = "GOUGOUGAGA"
+horizontal_alignment = 2
+
+[node name="dollar_label" type="Label" parent="." unique_id=450362323]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 23.0
+offset_right = 501.0
+offset_bottom = 188.0
+theme_override_colors/font_color = Color(0.96862745, 0.94509804, 0.62352943, 1)
+theme_override_font_sizes/font_size = 15
+text = "$"
+
+[node name="money_background" type="Label" parent="." unique_id=1009864432]
+z_index = -1
+layout_mode = 0
+offset_left = 21.0
+offset_top = 26.0
+offset_right = 131.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "GOUGOUGAGA"
+horizontal_alignment = 2
+
+[node name="dollar_background" type="Label" parent="." unique_id=1370121351]
+z_index = -1
+layout_mode = 0
+offset_left = 147.0
+offset_top = 25.0
+offset_right = 505.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "$"

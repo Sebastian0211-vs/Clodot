@@ -1,0 +1,30 @@
+[gd_scene format=4 uid="uid://453yh6hm8dec"]
+
+[ext_resource type="Texture2D" uid="uid://cjfhvthsl1u8e" path="res://assets/tiles.png" id="1_20fyn"]
+[ext_resource type="Script" uid="uid://cuq0s67uthwos" path="res://scenes/game/background/BaseMap.gd" id="2_45vtv"]
+[ext_resource type="PackedScene" uid="uid://eqnnrx4oj3gq" path="res://scenes/game/player/player.tscn" id="3_e2tdv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_brorf"]
+texture = ExtResource("1_20fyn")
+texture_region_size = Vector2i(32, 16)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hh1vs"]
+tile_shape = 1
+tile_size = Vector2i(32, 16)
+sources/1 = SubResource("TileSetAtlasSource_brorf")
+
+[node name="chunk" type="TileMapLayer" unique_id=1002856617]
+z_index = -3
+tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wAAAQAAAAAAAAD+////AQACAAAAAAD///7/AQACAAAAAAD///3/AQACAAAAAAAAAP7/AQABAAAAAAAAAP//AQABAAAAAAAAAAAAAQABAAAAAAD//wEAAQAAAAAAAAABAP7/AQABAAAAAAAAAP3/AQABAAAAAAAAAPz/AQACAAAAAAD///v/AQACAAAAAAD///z/AQACAAAAAAD+//3/AQACAAAAAAD+//7/AQACAAAAAAD9////AQAAAAAAAAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wIAAQAAAAAAAAD//wMAAQAAAAAAAAAAAAIAAQACAAAAAAAAAAEAAQACAAAAAAABAAAAAQABAAAAAAABAP//AQABAAAAAAACAAAAAQABAAAAAAABAAEAAQABAAAAAAABAAIAAQABAAAAAAAAAAMAAQABAAAAAAAAAAQAAQABAAAAAAD//wUAAQACAAAAAAD//wQAAQACAAAAAAD+/wMAAQACAAAAAAD+/wIAAQACAAAAAAD9/wEAAQACAAAAAAD9/wAAAQACAAAAAAD8////AQACAAAAAAD9//7/AQACAAAAAAD9//3/AQACAAAAAAD+//z/AQACAAAAAAD+//v/AQACAAAAAAD///r/AQACAAAAAAD///n/AQAAAAAAAAAAAPr/AQAAAAAAAAAAAPv/AQABAAAAAAABAPz/AQABAAAAAAABAP3/AQABAAAAAAACAP7/AQABAAAAAAACAP//AQABAAAAAAA=")
+tile_set = SubResource("TileSet_hh1vs")
+script = ExtResource("2_45vtv")
+
+[node name="Player" parent="." unique_id=1060798901 instance=ExtResource("3_e2tdv")]
+position = Vector2(1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=220336656]
+
+[node name="world" type="Node2D" parent="." unique_id=1192072035]
