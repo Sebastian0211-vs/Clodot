@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="uid://453yh6hm8dec"
 
+[autoload]
+
+InvShop="*uid://baa37w5dl3xyv"
+
 [display]
 
 window/size/viewport_width=1920

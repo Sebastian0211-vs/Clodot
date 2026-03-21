@@ -15,10 +15,11 @@ var stamina = 0
 var moneyIndicator = 0.0
 
 func _ready():
+	add_to_group("player")
 	thirsty = 100
 	hungry = 100
 	stamina = 100
-	moneyIndicator = 0.0
+	moneyIndicator = 100.0
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)

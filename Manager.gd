@@ -5,14 +5,8 @@ enum MODE {
 	SHOP
 } 
 
-@export var currency : int = 0:
-	set(value):
-		currency = value
-		
-		%Balance.text = str(value)
-
 func _ready():
-	currency = 100
+	visible = false
 
 func _input(event):
 	if event.is_action_pressed("inventory"):
