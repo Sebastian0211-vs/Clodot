@@ -1,10 +1,5 @@
 extends Node
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  InputManager.gd  —  48 French phonemes mapped to keyboard keys
-#  Put all .mp3 files in res://audio/ and add this script as an AutoLoad.
-# ─────────────────────────────────────────────────────────────────────────────
-
 const BASE_MAP: Dictionary = {
 	# ── Vowels ────────────────────────────────────────────────────────────────
 	KEY_I:  { "label": "-i-",         "file": "2191_vignette_-i-.mp3"         },
@@ -41,11 +36,11 @@ const BASE_MAP: Dictionary = {
 	KEY_J:        { "label": "-na-",  "file": "2553_vignette_-na-.mp3"        },
 	KEY_L:        { "label": "-n-",   "file": "2554_vignette_-n-.mp3"         },
 	KEY_1:        { "label": "-fa-",  "file": "2555_vignette_-fa-.mp3"        },
-	KEY_F:        { "label": "-f-",   "file": "2556_vignette_-f-.mp3"         },  # NEW
+	KEY_F:        { "label": "-f-",   "file": "2556_vignette_-f-.mp3"         }, 
 	KEY_2:        { "label": "-va-",  "file": "2557_vignette_-va-.mp3"        },
 	KEY_V:        { "label": "-v-",   "file": "2558_vignette_-v-_0.mp3"       },
 	KEY_3:        { "label": "-sa-",  "file": "2559_vignette_-sa-.mp3"        },
-	KEY_S:        { "label": "-s-",   "file": "2560_vignette_-s-.mp3"         },  # NEW
+	KEY_S:        { "label": "-s-",   "file": "2560_vignette_-s-.mp3"         }, 
 	KEY_4:        { "label": "-za-",  "file": "2561_vignette_-za-.mp3"        },
 	KEY_Z:        { "label": "-z-",   "file": "2562_vignette_-z-.mp3"         },
 	KEY_5:        { "label": "-cha-", "file": "2563_vignette_-cha-.mp3"       },
@@ -53,10 +48,10 @@ const BASE_MAP: Dictionary = {
 	KEY_6:        { "label": "-gea-", "file": "2565_vignette_-gea-.mp3"       },
 	KEY_X:        { "label": "-ge-",  "file": "2566_vignette_-ge-.mp3"        },
 	KEY_Y:        { "label": "-ja-",  "file": "2567_vignette_-ja-.mp3"        },
-	KEY_F5:       { "label": "-la-",  "file": "2572_vignette_-la-.mp3"        },  # NEW
-	KEY_F6:       { "label": "-l-",   "file": "2573_vignette_-l-.mp3"         },  # NEW
-	KEY_F7:       { "label": "-ra-",  "file": "2574_vignette_-ra-.mp3"        },  # NEW
-	KEY_F8:       { "label": "-r-",   "file": "2575_vignette_-r-.mp3"         },  # NEW
+	KEY_F5:       { "label": "-la-",  "file": "2572_vignette_-la-.mp3"        },  
+	KEY_F6:       { "label": "-l-",   "file": "2573_vignette_-l-.mp3"         },  
+	KEY_F7:       { "label": "-ra-",  "file": "2574_vignette_-ra-.mp3"        },  
+	KEY_F8:       { "label": "-r-",   "file": "2575_vignette_-r-.mp3"         }, 
 }
 
 var key_map: Dictionary = {}
