@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Clodot:LeFouDeLaGare"
+run/main_scene="uid://cjfysc2wj387i"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+InputManager="*uid://gkf1by0jiklb"
 
 [editor]
 
