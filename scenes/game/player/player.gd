@@ -25,16 +25,16 @@ func _process(delta: float) -> void:
 	move()
 	
 func get_input():
-	if Input.is_action_pressed("ui_up"): KEY_UP = true
+	if Input.is_action_pressed("up"): KEY_UP = true
 	else : KEY_UP = false
 	
-	if Input.is_action_pressed("ui_down"): KEY_DOWN = true
+	if Input.is_action_pressed("down"): KEY_DOWN = true
 	else : KEY_DOWN = false
 	
-	if Input.is_action_pressed("ui_left"): KEY_LEFT = true
+	if Input.is_action_pressed("left"): KEY_LEFT = true
 	else : KEY_LEFT = false
 	
-	if Input.is_action_pressed("ui_right"): KEY_RIGHT = true
+	if Input.is_action_pressed("right"): KEY_RIGHT = true
 	else : KEY_RIGHT = false
 
 func set_direction():
