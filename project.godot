@@ -18,7 +18,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+<<<<<<< HEAD
 InputManager="*uid://gkf1by0jiklb"
+=======
+InvShop="*uid://baa37w5dl3xyv"
+>>>>>>> a5db069603dadb611b8c161377366c21452f38e9
 
 [display]
 

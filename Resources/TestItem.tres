@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://c5x157ju5hast"]
+
+[ext_resource type="Texture2D" uid="uid://c6q3wsdpc6bry" path="res://icon.svg" id="1_f2io2"]
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://Item.gd" id="2_x6s6c"]
+
+[resource]
+script = ExtResource("2_x6s6c")
+icon = ExtResource("1_f2io2")
+name = "Test Item"
+cost = 50.0
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"
