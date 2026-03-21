@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://7xuelvaiab3k"]
+
+[ext_resource type="Script" uid="uid://uls8ek2taesx" path="res://scenes/game/player/bars/thirsty.gd" id="1_jwr8l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp0ge"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwr8l"]
+bg_color = Color(0.54901963, 0.7764706, 0.9019608, 1)
+
+[node name="Thirsty" type="ProgressBar" unique_id=1184500359]
+offset_right = 240.0
+offset_bottom = 4.0
+theme_override_styles/background = SubResource("StyleBoxFlat_pp0ge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jwr8l")
+value = 60.0
+show_percentage = false
+script = ExtResource("1_jwr8l")
+
+[node name="Timer" type="Timer" parent="." unique_id=763920526]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

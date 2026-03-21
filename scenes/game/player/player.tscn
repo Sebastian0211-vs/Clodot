@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://du6uhnanew3ts" path="res://scenes/game/player/player.gd" id="1_bkoau"]
 [ext_resource type="Texture2D" uid="uid://r37j52l5mpqk" path="res://assets/player/walking_straight.png" id="2_3nnbx"]
 [ext_resource type="Texture2D" uid="uid://cpd3oq50jub4i" path="res://assets/player/idle.png" id="2_m1i7t"]
+[ext_resource type="PackedScene" uid="uid://bc43w1ey46qxm" path="res://scenes/game/player/bars/player_ui.tscn" id="5_prej5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2gxi"]
 
@@ -110,3 +111,11 @@ shape = SubResource("CircleShape2D_n2gxi")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=389789181]
 sprite_frames = SubResource("SpriteFrames_c3urb")
 animation = &"down_right"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=548641903]
+
+[node name="PlayerUi" parent="." unique_id=1507388174 instance=ExtResource("5_prej5")]
+offset_left = -575.0
+offset_top = -323.0
+offset_right = 575.0
+offset_bottom = 325.0

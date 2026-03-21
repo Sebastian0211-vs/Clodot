@@ -443,8 +443,6 @@ sources/1 = SubResource("TileSetAtlasSource_ndbrc")
 [node name="Player" parent="." unique_id=1060798901 instance=ExtResource("1_uv15u")]
 position = Vector2(375, 207)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2006464565]
-
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1146435450]
 visibility_layer = 2
 z_index = -10
