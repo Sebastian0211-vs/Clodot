@@ -66,7 +66,8 @@ sources/3 = SubResource("TileSetAtlasSource_68iyn")
 script = SubResource("GDScript_g5t8f")
 
 [node name="Player" parent="." unique_id=1060798901 instance=ExtResource("2_d8brc")]
-z_index = 10
+z_index = 1
+collision_layer = 1
 
 [node name="BaseMap" parent="." unique_id=1002856617 instance=ExtResource("1_g5t8f")]
 y_sort_enabled = true

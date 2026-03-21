@@ -455,4 +455,4 @@ offset_right = 262.0
 offset_bottom = 157.0
 
 [node name="FloatingLabel" parent="." unique_id=1981264930 instance=ExtResource("4_abehh")]
-position = Vector2(-89, -72)
+position = Vector2(-43, -64)

@@ -8,6 +8,7 @@ var time = 0.0
 @onready var staminaBar = $PlayerUi/StaminaBar
 @onready var moneyLabel = $PlayerUi/money/money_label
 @onready var moneyBackground = $PlayerUi/money/money_background
+@onready 
 
 var thirsty = 0
 var hungry = 0
@@ -15,6 +16,8 @@ var stamina = 0
 var moneyIndicator = 0.0
 
 func _ready():
+
+	print("PLAYER READY: ", self, " path: ", get_path())
 	thirsty = 100
 	hungry = 100
 	stamina = 100
@@ -22,6 +25,16 @@ func _ready():
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)
+	InputManager.phoneme_played.connect(_on_phoneme_played)
+
+const FloatingLabel = preload("res://scenes/game/player/FloatingLabel.tscn")
+
+
+func _on_phoneme_played(label: String):
+	var fl = FloatingLabel.instantiate()
+	get_tree().current_scene.add_child(fl)
+	fl.global_position = global_position + Vector2(randf_range(-20, 20), -40)
+	fl.init(label)
 	
 #PER SECONDS
 var THIRSTFACTOR = 5
@@ -70,7 +83,10 @@ enum direction{
 	DOWN_LEFT,
 	LEFT,
 	RIGHT,
-	IDLE
+	IDLE_UP,
+	IDLE_DOWN,
+	IDLE_UP_LEFT,
+	IDLE_DOWN_LEFT
 }
 var KEY_UP = false
 var KEY_DOWN = false
@@ -87,27 +103,62 @@ func get_input():
 	if Input.is_action_pressed("right"): KEY_RIGHT = true
 	else : KEY_RIGHT = false
 
+var up = false
+var down = false
+var left = false
+var right = false
+
 func set_direction():
 	if KEY_UP:
+		up = true
+		down = false
 		if KEY_LEFT:
+			left = true
+			right = false
 			current_direction = direction.UP_LEFT
 		elif KEY_RIGHT:
+			left = false
+			right = true
 			current_direction = direction.UP_RIGHT
 		else:
 			current_direction = direction.UP
 	elif KEY_DOWN:
+		up = false
+		down = true
 		if KEY_LEFT:
+			left = true
+			right = false
 			current_direction = direction.DOWN_LEFT
 		elif KEY_RIGHT:
+			left = false
+			right = true
 			current_direction = direction.DOWN_RIGHT
 		else:
 			current_direction = direction.DOWN
 	elif KEY_LEFT:
+		left = true
+		right = false
 		current_direction = direction.LEFT
 	elif KEY_RIGHT:
+		left = false
+		right = true
 		current_direction = direction.RIGHT
 	else:
-		current_direction = direction.IDLE
+		if up:
+			if left:
+				current_direction = direction.IDLE_UP_LEFT
+			else:
+				current_direction = direction.IDLE_UP
+		elif down:
+			if left:
+				current_direction = direction.IDLE_DOWN_LEFT
+			else:
+				current_direction = direction.IDLE_DOWN
+		else:
+			if left:
+				current_direction = direction.IDLE_DOWN_LEFT
+			else:
+				current_direction = direction.IDLE_DOWN
 
 var was_up = false
 var was_down = false
@@ -129,6 +180,19 @@ func _calc_phase_x():
 
 func _calc_phase_y():
 	phase_offset_y = asin(clamp($AnimatedSprite2D.position.y / INTENSITY, -1.0, 1.0)) - time * FREQUENCY
+
+func _reset():
+	was_up = false
+	was_down = false
+	was_left = false
+	was_right = false
+	was_up_left = false
+	was_up_right = false
+	was_down_left = false
+	was_down_right = false
+	self.velocity = Vector2(0, 0)
+	#$AnimatedSprite2D.position.x = lerp($AnimatedSprite2D.position.x, 0.0, 10.0 * delta)
+	#$AnimatedSprite2D.position.y = lerp($AnimatedSprite2D.position.y, 0.0, 10.0 * delta)
 
 func move(delta: float):
 	match current_direction:
@@ -208,19 +272,21 @@ func move(delta: float):
 			$AnimatedSprite2D.position.y = sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.play("down_right")
 
-		direction.IDLE:
-			was_up = false
-			was_down = false
-			was_left = false
-			was_right = false
-			was_up_left = false
-			was_up_right = false
-			was_down_left = false
-			was_down_right = false
-			self.velocity = Vector2(0, 0)
-			$AnimatedSprite2D.position.x = lerp($AnimatedSprite2D.position.x, 0.0, 10.0 * delta)
-			$AnimatedSprite2D.position.y = lerp($AnimatedSprite2D.position.y, 0.0, 10.0 * delta)
-			$AnimatedSprite2D.play("idle")
+		direction.IDLE_UP:
+			_reset()
+			$AnimatedSprite2D.play("idle_up")
+			
+		direction.IDLE_UP_LEFT:
+			_reset()
+			$AnimatedSprite2D.play("idle_up_left")
+			
+		direction.IDLE_DOWN:
+			_reset()
+			$AnimatedSprite2D.play("idle_down")
+			
+		direction.IDLE_DOWN_LEFT:
+			_reset()
+			$AnimatedSprite2D.play("idle_down_left")
 
 	move_and_slide()
 

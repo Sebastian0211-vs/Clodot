@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dovj51lnt55vu"]
+
+[ext_resource type="Script" uid="uid://n8yqixtvsx3p" path="res://scenes/game/player/floating_label.gd" id="1_ds40k"]
+
+[node name="FloatingLabel" type="Node2D" unique_id=1981264930]
+script = ExtResource("1_ds40k")
+
+[node name="Label" type="Label" parent="." unique_id=1767648814]
+offset_left = -1.0
+offset_top = 5.0
+offset_right = 331.0
+offset_bottom = 158.0
+text = "test"
