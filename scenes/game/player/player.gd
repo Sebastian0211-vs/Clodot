@@ -271,9 +271,7 @@ func move(delta: float):
 			$AnimatedSprite2D.play("down_right")
 
 		direction.IDLE_UP:
-			#LE CHECK POUR CHECK PHRASE
-			#if InputManager.check_phrase_str("ba na na"):
-			#	print("bravo !")
+
 			_reset()
 			$AnimatedSprite2D.play("idle_up")
 			

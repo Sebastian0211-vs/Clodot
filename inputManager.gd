@@ -122,6 +122,10 @@ func _process(delta: float) -> void:
 			emit_signal("history_reset")
 			print("[InputManager] HISTORY RESETED")
 
+#LE CHECK POUR CHECK PHRASE
+#if InputManager.check_phrase_str("ba na na"):
+#	print("c bien frr")
+
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
