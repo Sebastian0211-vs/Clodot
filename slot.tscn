@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://fpcn0lmwd8fl"]
+
+[ext_resource type="Script" uid="uid://dad0qi71bm3nb" path="res://Slot.gd" id="1_c24ra"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_khion"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="Slot" type="PanelContainer" unique_id=321017764]
+offset_right = 145.0
+offset_bottom = 145.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_khion")
+script = ExtResource("1_c24ra")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=7633563]
+custom_minimum_size = Vector2(125, 125)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
