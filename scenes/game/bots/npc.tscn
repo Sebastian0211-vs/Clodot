@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bsomled7twcgq"]
+
+[ext_resource type="Script" uid="uid://dbjov8fuhxp5u" path="res://scenes/game/bots/npc.gd" id="1_0ax1m"]
+[ext_resource type="SpriteFrames" uid="uid://cy8rogg5adog2" path="res://assets/pnj/jobelin.tres" id="1_2nkmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmetw"]
+size = Vector2(56, 62)
+
+[node name="Npc" type="AnimatedSprite2D" unique_id=2018850458]
+sprite_frames = ExtResource("1_2nkmh")
+script = ExtResource("1_0ax1m")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=855327100]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1378805216]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_lmetw")
+
+[node name="Text" type="Node2D" parent="." unique_id=985007698]
+
+[node name="Label" type="Label" parent="Text" unique_id=303420149]
+offset_left = 10.0
+offset_top = -32.0
+offset_right = 43.0
+offset_bottom = -11.0
+theme_override_font_sizes/font_size = 6
+text = "[SPACE]"
+metadata/_edit_use_anchors_ = true

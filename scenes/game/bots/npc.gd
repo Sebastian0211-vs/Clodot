@@ -1,10 +1,17 @@
-extends Sprite2D
+extends AnimatedSprite2D
 
 enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 
 @export var camera: Camera2D
 @export var offscreen_timeout: float = 1.5
 @onready var textbox = $Text
+
+var sprites = {
+	0: "allan.tres",
+	1: "blahaj.tres",
+	2: "chingchong.tres",
+	3: "jobelin.tres"
+}
 
 var player_nearby = false
 var _velocity: Vector2 = Vector2.ZERO
@@ -14,8 +21,6 @@ var textbox_tween: Tween
 var shake_time: float = 0.0
 var base_textbox_pos: Vector2
 var direction = 0.0
-
-
 
 func _ready() -> void:
 	add_child(textbox)
@@ -92,15 +97,21 @@ func _bounce_both():
 	
 	ConversationManager.start_conversation(self)
 
-func setup(dir, velocity: Vector2) -> void:
-	var id = randi() % 4
+func setup(dir, velocity: Vector2, id) -> void:
 	direction = dir
-	_velocity = direction*velocity
+	_velocity = direction * velocity
 	visible = true
+
+	var path = "res://assets/pnj/"+sprites[id]
+
+	var frames = load(path)
+	if frames and frames is SpriteFrames:
+		sprite_frames = frames
+		play("default")
 
 func _update_state(delta: float) -> void:
 	var on_screen = _is_on_screen()
-
+	
 	match _state:
 		State.OFFSCREEN_INITIAL:
 			if on_screen:

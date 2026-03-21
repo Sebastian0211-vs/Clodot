@@ -434,6 +434,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abehh"]
+size = Vector2(30, 51)
+
 [node name="Player" type="CharacterBody2D" unique_id=1060798901]
 collision_layer = 3
 motion_mode = 1
@@ -454,3 +457,11 @@ offset_bottom = 157.0
 
 [node name="FloatingLabel" parent="." unique_id=1981264930 instance=ExtResource("4_abehh")]
 position = Vector2(-89, -72)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1218723476 groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=625241957]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_abehh")
+
+[node name="camera" type="Camera2D" parent="." unique_id=357764583]

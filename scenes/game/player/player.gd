@@ -8,6 +8,7 @@ var time = 0.0
 @onready var staminaBar = $PlayerUi/StaminaBar
 @onready var moneyLabel = $PlayerUi/money/money_label
 @onready var moneyBackground = $PlayerUi/money/money_background
+@onready var camera = $camera
 
 var thirsty = 0
 var hungry = 0
@@ -24,6 +25,9 @@ func _ready():
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)
 	InputManager.phoneme_played.connect(_on_phoneme_played)
+	camera.add_to_group("camera")
+	ConversationManager.conversation_started.connect(_on_conv_started)
+	ConversationManager.conversation_ended.connect(_on_conv_ended)
 
 const FloatingLabel = preload("res://scenes/game/player/FloatingLabel.tscn")
 
@@ -39,7 +43,17 @@ var THIRSTFACTOR = 0.1
 var HUNGERFACTOR = 0.1
 var STAMINAFACTOR = 0.1
 	
-func _process(delta: float) -> void:
+var locked = false
+
+func _on_conv_started(_pnj):
+	locked = true
+
+func _on_conv_ended():
+	locked = false
+
+func _process(delta):
+	if locked:
+		return
 	time += delta
 	update_attributes(delta)
 	get_input()

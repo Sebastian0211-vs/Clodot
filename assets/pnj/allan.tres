@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cnm41mjqk7b4p"]
+
+[ext_resource type="Texture2D" uid="uid://d3kh16mg65bvs" path="res://assets/pnj/allan.png" id="1_83lhf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83lhf"]
+atlas = ExtResource("1_83lhf")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krjlg"]
+atlas = ExtResource("1_83lhf")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8lc8"]
+atlas = ExtResource("1_83lhf")
+region = Rect2(100, 0, 50, 50)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83lhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krjlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8lc8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

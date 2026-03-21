@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 InputManager="*uid://gkf1by0jiklb"
+<<<<<<<HEADInputManager="*uid://gkf1by0jiklb"
+ConversationManager="*uid://sdrw2vokkut5"
 
 [display]
 

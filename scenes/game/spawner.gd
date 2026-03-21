@@ -44,7 +44,8 @@ func _spawn_character() -> void:
 			pos = Vector2(randf_range(rect.position.x, rect.end.x), rect.end.y + 50)
 			direction = Vector2(randf_range(-0.3, 0.3), -1).normalized()
 
+	var id = randi()%4
 	character.global_position = pos
 	character.camera = camera
 	add_child(character)
-	character.setup(direction * move_speed)
+	character.setup(direction, direction * move_speed, id)

@@ -1,8 +1,28 @@
-[gd_scene format=3 uid="uid://ddtkgx380ch48"]
+[gd_scene format=3 uid="uid://qpsi4o8dp4cu"]
 
-[ext_resource type="Texture2D" uid="uid://cdsxgji8q6m31" path="res://assets/pnj_1.png" id="1_mi2q2"]
-[ext_resource type="Script" uid="uid://cuknhw66cw3ej" path="res://scenes/game/sprite_2d.gd" id="2_g1h3d"]
+[ext_resource type="Texture2D" uid="uid://dn3eotl3ycmmj" path="res://assets/pnj_1.png" id="1_mi2q2"]
+[ext_resource type="Script" uid="uid://dqwxsp62pm0jk" path="res://scenes/game/sprite_2d.gd" id="2_g1h3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi2q2"]
+size = Vector2(56, 62)
 
 [node name="Sprite2D" type="Sprite2D" unique_id=1903647632]
 texture = ExtResource("1_mi2q2")
 script = ExtResource("2_g1h3d")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=996491835]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1147640305]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_mi2q2")
+
+[node name="Text" type="Node2D" parent="." unique_id=989095263]
+
+[node name="Label" type="Label" parent="Text" unique_id=704883739]
+offset_left = 10.0
+offset_top = -32.0
+offset_right = 43.0
+offset_bottom = -11.0
+theme_override_font_sizes/font_size = 6
+text = "[SPACE]"
+metadata/_edit_use_anchors_ = true
