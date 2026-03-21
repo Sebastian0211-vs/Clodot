@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkrf7t7l3fj6f"
-path="res://.godot/imported/tiles.png-0d11a4bcdfb48056f67a66da241684a1.ctex"
+uid="uid://r37j52l5mpqk"
+path="res://.godot/imported/walking_straight.png-3cfebd081c56aba2a266c0cc474f35f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles.png"
-dest_files=["res://.godot/imported/tiles.png-0d11a4bcdfb48056f67a66da241684a1.ctex"]
+source_file="res://assets/player/walking_straight.png"
+dest_files=["res://.godot/imported/walking_straight.png-3cfebd081c56aba2a266c0cc474f35f1.ctex"]
 
 [params]
 

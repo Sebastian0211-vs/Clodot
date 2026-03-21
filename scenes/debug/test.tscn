@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://d2aej0rebw1qq"]
+
+[ext_resource type="Script" uid="uid://du6uhnanew3ts" path="res://scenes/game/player/player.gd" id="1_gidea"]
+[ext_resource type="Texture2D" uid="uid://r37j52l5mpqk" path="res://assets/player/walking_straight.png" id="2_3nnbx"]
+[ext_resource type="Texture2D" uid="uid://cpd3oq50jub4i" path="res://assets/player/idle.png" id="2_m1i7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1i7t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5ya1"]
+atlas = ExtResource("2_3nnbx")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umx7j"]
+atlas = ExtResource("2_3nnbx")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67eko"]
+atlas = ExtResource("2_3nnbx")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpy2p"]
+atlas = ExtResource("2_3nnbx")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk5l5"]
+atlas = ExtResource("2_3nnbx")
+region = Rect2(200, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kmes"]
+atlas = ExtResource("2_3nnbx")
+region = Rect2(250, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgtno"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m1i7t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5ya1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umx7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67eko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpy2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk5l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kmes")
+}],
+"loop": true,
+"name": &"up",
+"speed": 6.0
+}]
+
+[node name="MovementPlayerDebug" type="Node2D" unique_id=1447489635]
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=1574813821]
+motion_mode = 1
+script = ExtResource("1_gidea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=356537245]
+shape = SubResource("CircleShape2D_m1i7t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player" unique_id=2100206118]
+sprite_frames = SubResource("SpriteFrames_xgtno")
+animation = &"idle"
