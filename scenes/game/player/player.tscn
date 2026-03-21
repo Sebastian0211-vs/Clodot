@@ -446,8 +446,6 @@ shape = SubResource("CircleShape2D_n2gxi")
 sprite_frames = SubResource("SpriteFrames_c3urb")
 animation = &"up"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=548641903]
-
 [node name="PlayerUi" parent="." unique_id=1507388174 instance=ExtResource("5_prej5")]
 offset_left = -164.0
 offset_top = -120.0

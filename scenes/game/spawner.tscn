@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b5cjs8oiq4rwu"]
+
+[ext_resource type="Script" uid="uid://c03jx7q0ml838" path="res://scenes/game/spawner.gd" id="1_xeolc"]
+[ext_resource type="PackedScene" uid="uid://ddtkgx380ch48" path="res://scenes/game/sprite_2d.tscn" id="2_xydd0"]
+
+[node name="spawner" type="Node2D" unique_id=530040227]
+script = ExtResource("1_xeolc")
+character_scene = ExtResource("2_xydd0")

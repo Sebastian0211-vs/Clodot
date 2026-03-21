@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ujflr214pu1y" path="res://scenes/game/background/chunk_manager.gd" id="3_d8brc"]
 [ext_resource type="Texture2D" uid="uid://50ou7lqprpev" path="res://assets/tiles2.png" id="3_w1nur"]
 [ext_resource type="PackedScene" uid="uid://cdnp7k7debhhg" path="res://scenes/game/background/chunk.tscn" id="4_qd3kh"]
+[ext_resource type="PackedScene" path="res://scenes/game/spawner.tscn" id="6_q5tta"]
 
 [sub_resource type="GDScript" id="GDScript_g5t8f"]
 script/source = "extends Node2D
@@ -69,6 +70,8 @@ script = SubResource("GDScript_g5t8f")
 z_index = 1
 collision_layer = 1
 
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=874014751]
+
 [node name="BaseMap" parent="." unique_id=1002856617 instance=ExtResource("1_g5t8f")]
 y_sort_enabled = true
 position = Vector2(11, 8)
@@ -84,3 +87,6 @@ chunk = NodePath("../Chunk")
 y_sort_enabled = true
 position = Vector2(-45.806244, 47.611816)
 tile_set = SubResource("TileSet_vn813")
+
+[node name="spawner" parent="." unique_id=530040227 node_paths=PackedStringArray("camera") instance=ExtResource("6_q5tta")]
+camera = NodePath("../Player/Camera2D")
