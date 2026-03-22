@@ -18,9 +18,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-InputManager="*uid://gkf1by0jiklb"
+Notebook="*uid://b2c0saqcsou55"
+<<<<<<<UpdatedupstreamInvShop="*uid://baa37w5dl3xyv"
 InvShop="*uid://baa37w5dl3xyv"
-ConversationManager="*uid://sdrw2vokkut5"
+ConversationManager="*res://scenes/game/player/ConversationManager.gd"
+InputManager="*uid://gkf1by0jiklb"
 
 [display]
 
