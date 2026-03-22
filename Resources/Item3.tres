@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bwsxf71ko734p"]
+
+[ext_resource type="Texture2D" uid="uid://dpuu4onebc7vs" path="res://Resources/sand.png" id="1_tjrvr"]
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="1_u6ufr"]
+
+[resource]
+script = ExtResource("1_u6ufr")
+icon = ExtResource("1_tjrvr")
+name = "Sandwich"
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"
