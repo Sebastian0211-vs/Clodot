@@ -146,7 +146,7 @@ func _input(event: InputEvent) -> void:
 
 	var kc: int = event.keycode
 
-	if kc == KEY_TAB:
+	if kc == KEY_CAPSLOCK:
 		get_viewport().set_input_as_handled()
 		_toggle()
 		return
