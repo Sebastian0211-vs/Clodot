@@ -69,7 +69,7 @@ func using(data):
 				_player.moneyIndicator += 500			
 			print("gambling")
 		6:
-			_player.thirst += 75
+			_player.thirsty += 75
 			print("watah")
 	data.item = null 
 	item = null
