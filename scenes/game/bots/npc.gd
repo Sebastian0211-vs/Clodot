@@ -10,7 +10,8 @@ var sprites = {
 	0: "allan.tres",
 	1: "blahaj.tres",
 	2: "chingchong.tres",
-	3: "jobelin.tres"
+	3: "jobelin.tres",
+	4: "shop.tres",
 }
 
 var player_nearby = false
@@ -21,6 +22,7 @@ var textbox_tween: Tween
 var shake_time: float = 0.0
 var base_textbox_pos: Vector2
 var direction: Vector2 = Vector2.ZERO
+var id = 0
 
 func _ready() -> void:
 	add_child(textbox)
@@ -79,7 +81,8 @@ func _input(event):
 			_start_discussion()
 		elif event.keycode == KEY_SPACE and start == true:
 			start = false
-			_velocity = direction*10
+			if id != 4:
+				_velocity = direction*10
 			_show_textbox()
 			ConversationManager.end_conversation()
 		
@@ -97,7 +100,8 @@ func _bounce_both():
 	
 	ConversationManager.start_conversation(self)
 
-func setup(dir: Vector2, velocity: float, id) -> void:
+func setup(dir: Vector2, velocity: float, iD) -> void:
+	id = iD
 	direction = dir.normalized()
 	_velocity = direction * velocity
 	visible = true
@@ -108,6 +112,8 @@ func setup(dir: Vector2, velocity: float, id) -> void:
 	if frames and frames is SpriteFrames:
 		sprite_frames = frames
 		play("default")
+	if iD == 4:
+		_velocity = Vector2(0,0)
 
 func _update_state(delta: float) -> void:
 	var on_screen = _is_on_screen()
@@ -131,7 +137,7 @@ func _update_state(delta: float) -> void:
 func _is_on_screen() -> bool:
 	var screen_size = get_viewport().get_visible_rect().size / camera.zoom
 	var cam_pos = camera.global_position 
-	var margin = 64.0
+	var margin = 300.0
 	var rect = Rect2(
 		cam_pos - screen_size / 2 - Vector2(margin, margin),
 		screen_size + Vector2(margin * 2, margin * 2)

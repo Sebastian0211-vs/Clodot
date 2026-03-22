@@ -18,7 +18,6 @@ func _process(delta: float) -> void:
 		_timer = 0.0
 		_spawn_character()
 
-
 func _spawn_character() -> void:
 	var character = character_scene.instantiate()
 
@@ -41,7 +40,7 @@ func _spawn_character() -> void:
 			pos = Vector2(randf_range(rect.position.x, rect.end.x), rect.end.y + 50)
 			direction = Vector2(randf()-0.5,randf()-0.5).normalized()
 
-	var id = randi()%4
+	var id = randi()%5
 	character.global_position = pos
 	character.camera = camera
 	add_child(character)
