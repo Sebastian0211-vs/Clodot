@@ -7,7 +7,6 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @onready var textbox = $Text
 @onready var dialogbox = $Dialog/PanelContainer/Label
 @onready var dialogPanel = $Dialog/PanelContainer
-@onready var dialogbox = $Dialog/Label
 @export var items : Array[Item]
 
 
@@ -136,6 +135,7 @@ func _on_conv_ended():  # dans le NPC
 		_velocity = direction * 10
 	else:
 		_is_shopping = false
+		Ui.close_mode()
 	_show_textbox()
 
 func _start_discussion():
