@@ -1,13 +1,11 @@
 [gd_scene format=3 uid="uid://bsomled7twcgq"]
 
 [ext_resource type="Script" uid="uid://dbjov8fuhxp5u" path="res://scenes/game/bots/npc.gd" id="1_0ax1m"]
-[ext_resource type="SpriteFrames" uid="uid://cciph5nbx0mm3" path="res://assets/pnj/shop.tres" id="1_2nkmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmetw"]
 size = Vector2(56, 62)
 
 [node name="Npc" type="AnimatedSprite2D" unique_id=2018850458]
-sprite_frames = ExtResource("1_2nkmh")
 script = ExtResource("1_0ax1m")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=855327100]
