@@ -38,6 +38,17 @@ var sprites = {
 	7: "sus.tres"
 }
 
+var audio = {
+	0: "audio2/audio_effects/allanpetitpieds.wav",
+	1: "audio2/audio_effects/blahajgrandequeue.wav",
+	2: "audio2/audio_effects/busibessmangrandsreves.wav",
+	3: "audio2/audio_effects/gobelinpiedsmoites.wav",
+	4: "audio2/audio_effects/hello.wav",
+	5: "audio2/audio_effects/busibessmangrandsreves.wav",
+	6: "audio2/audio_effects/hello.wav",
+	7: "audio2/audio_effects/sus.wav"
+}
+
 var player_nearby = false
 var _is_shopping = false
 var _velocity: Vector2 = Vector2.ZERO
@@ -173,6 +184,18 @@ func _start_discussion():
 	_hide_textbox()
 	_bounce_both()
 	if id == 4 and _is_shopping == false:
+		var p := AudioStreamPlayer.new()
+		add_child(p)
+		InputManager._players.append(p)
+
+		audioplayer_id = len(InputManager._players)-1
+
+		var stream: AudioStream = load("audio2/audio_effects/shop.wav")
+		var player: AudioStreamPlayer = InputManager._players[audioplayer_id]
+		player.stream = stream
+		player.play()
+		_audio_played = true
+		
 		_shop_time()
 
 func _bounce_both():
@@ -186,12 +209,13 @@ var dialogue_lines: Array = []
 var _line_index: int = 0
 
 func setup(dir: Vector2, velocity: float, iD) -> void:
+
 	_speed = velocity
 	id = iD
 	direction = dir.normalized()
 	_velocity = direction * velocity
 	visible = true
-
+	
 	var pool = DIALOGUES[id].duplicate()
 	pool.shuffle()
 	dialogue_lines = pool.slice(0, 1)
@@ -203,6 +227,22 @@ func setup(dir: Vector2, velocity: float, iD) -> void:
 		play("default")
 	if iD == 4:
 		_velocity = Vector2(0, 0)
+		
+		
+	
+			
+func _is_visually_on_screen() -> bool:
+	var screen_size = get_viewport().get_visible_rect().size / camera.zoom
+	var cam_pos = camera.global_position
+	var rect = Rect2(cam_pos - screen_size / 2, screen_size)
+	return rect.has_point(global_position)	
+	
+		
+var _audio_played = false
+
+var p := AudioStreamPlayer.new()
+var audioplayer_id = 0
+
 
 func _update_state(delta: float) -> void:
 	var on_screen = _is_on_screen()
@@ -216,10 +256,27 @@ func _update_state(delta: float) -> void:
 			if not on_screen:
 				_state = State.OFFSCREEN_FINAL
 				_offscreen_timer = 0.0
+			if not _audio_played and _is_visually_on_screen():
+				add_child(p)
+				InputManager._players.append(p)
+
+				audioplayer_id = len(InputManager._players)-1
+
+				var stream: AudioStream = load(audio[id])
+				var player: AudioStreamPlayer = InputManager._players[audioplayer_id]
+				player.stream = stream
+				player.volume_db = -15.0
+				player.play()
+				_audio_played = true
 
 		State.OFFSCREEN_FINAL:
 			_offscreen_timer += delta
 			if _offscreen_timer >= offscreen_timeout:
+				var stream: AudioStream = load(audio[id])
+				var player: AudioStreamPlayer = InputManager._players[audioplayer_id]
+				player.stream = stream
+				player.stop()
+				
 				queue_free()
 
 

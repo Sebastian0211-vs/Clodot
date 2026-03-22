@@ -178,8 +178,22 @@ func check_answer(spoken_text: Array) -> void:
 			var npc = _current_npc
 			await player.trigger_success()
 			var success = int(randi()%SUCCESS.size())
+			
 			npc.dialogtext.text =SUCCESS[success]
+			var p := AudioStreamPlayer.new()
+			add_child(p)
+			InputManager._players.append(p)
+			var audioplayer_id = len(InputManager._players)-1
+			var path = "audio2/audio_effects/cling.wav"
+			var stream: AudioStream = load(path)		
+			var player: AudioStreamPlayer = InputManager._players[audioplayer_id]
+			
+			player.stream = stream
+			player.play()
+			
 			await get_tree().create_timer(2.0).timeout
+			
+
 			end_conversation()
 			return 
 			
@@ -197,6 +211,23 @@ func check_answer(spoken_text: Array) -> void:
 		npc._speed = npc._speed * (10 + randf() * 30)
 		npc.get_node("StaticBody2D/CollisionShape2D").disabled = true
 		npc.get_node("Area2D/CollisionShape2D").disabled = true
+		
+		var p := AudioStreamPlayer.new()
+		add_child(p)
+		InputManager._players.append(p)
+
+		var audioplayer_id = len(InputManager._players)-1
+
+		var path = ""
+		if randi() %2 == 0:
+			path = "res://audio2/audio_effects/wrong_answer.wav"
+		else:
+			path = "res://audio2/audio_effects/wrong_answer.wav"
+		var stream: AudioStream = load(path)		
+		var player: AudioStreamPlayer = InputManager._players[audioplayer_id]
+		player.stream = stream
+		player.play()
+		
 		end_conversation()
 
 func end_conversation() -> void:
