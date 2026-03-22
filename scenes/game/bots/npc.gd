@@ -7,6 +7,8 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @onready var textbox = $Text
 @onready var dialogtext = $Dialog/PanelContainer/Label
 @onready var dialogPanel = $Dialog/PanelContainer
+@export var items : Array[Item]
+
 
 const DIALOGUES = {
 	0: ["Bonjour !", "Belle journée !", "Tu as vu mes clés ?", "J'aime les chats", "Sympa par ici"],
@@ -14,6 +16,9 @@ const DIALOGUES = {
 	2: ["Ni hao !", "Ça roule ?", "T'as faim ?", "On mange quoi ?", "Bonne chance !"],
 	3: ["Jobelin !", "Sacré jobelin", "Jobelinade", "Jobelos", "Jobeline forever"],
 	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Revenez vite", "Soldes !"],
+	5: ["Mon temps c'est de l'argent", "J'ai trois yachts, et toi ?", "Appelez mon assistant", "Marché conclu !", "Je rachète cet endroit"],
+	6: ["Ina ina ina !", "Takoooo !", "Je suis un Tako !", "Ninomae Ina'nis !", "Bloup bloup ~"],
+	7: ["...", "C'était qui ?!", "T'as l'air suspect", "Je vote rouge", "IMPOSTEUR !!!"],
 }
 
 var sprites = {
@@ -22,9 +27,13 @@ var sprites = {
 	2: "chingchong.tres",
 	3: "jobelin.tres",
 	4: "shop.tres",
+	5: "bigN.tres",
+	6: "tako.tres",
+	7: "sus.tres"
 }
 
 var player_nearby = false
+var _is_shopping = false
 var _velocity: Vector2 = Vector2.ZERO
 var _state: State = State.OFFSCREEN_INITIAL
 var _offscreen_timer: float = 0.0
@@ -48,6 +57,10 @@ func _ready() -> void:
 	dialogPanel.position = dialogtext.position
 	ConversationManager.conversation_ended.connect(_on_conv_ended)
 
+func _shop_time():
+	Ui.open_mode(Ui.MODE.SHOP,items)
+	_is_shopping = true
+
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player_nearby = true
@@ -59,7 +72,7 @@ func show_dialogue_line(line: String) -> void:
 	dialogPanel.visible = true
 	dialogPanel.modulate.a = 0.0
 
-	
+
 	var tween = create_tween()
 	tween.tween_property(dialogPanel, "modulate:a", 1.0, 0.2)
 
@@ -123,13 +136,16 @@ func _input(event):
 			if id != 4:
 				_velocity = direction*10
 			_show_textbox()
-			ConversationManager.advance() 
+			ConversationManager.advance()
 		
 
 func _on_conv_ended():  # dans le NPC
 	start = false
 	if id != 4:
 		_velocity = direction * _speed
+	else:
+		_is_shopping = false
+		Ui.close_mode()
 	_show_textbox()
 
 func _start_discussion():
@@ -137,6 +153,8 @@ func _start_discussion():
 	_velocity = Vector2(0.0,0.0)
 	_hide_textbox()
 	_bounce_both()
+	if id == 4 and _is_shopping == false:
+		_shop_time()
 
 func _bounce_both():
 	var tween = create_tween()

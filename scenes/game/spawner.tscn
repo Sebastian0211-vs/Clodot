@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dv7i08khuv0dk"]
+[gd_scene format=3 uid="uid://b5cjs8oiq4rwu"]
 
 [ext_resource type="Script" uid="uid://kdo7xm63wkyb" path="res://scenes/game/spawner.gd" id="1_xeolc"]
 [ext_resource type="PackedScene" uid="uid://bsomled7twcgq" path="res://scenes/game/bots/npc.tscn" id="2_xeolc"]

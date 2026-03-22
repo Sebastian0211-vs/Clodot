@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bmf6vkiafhejl"]
+
+[ext_resource type="Texture2D" uid="uid://b00ww3m3fbdkk" path="res://assets/pnj/tako.png" id="1_utwgv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utwgv"]
+atlas = ExtResource("1_utwgv")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8ejw"]
+atlas = ExtResource("1_utwgv")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ne6f6"]
+atlas = ExtResource("1_utwgv")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx3gi"]
+atlas = ExtResource("1_utwgv")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4n30"]
+atlas = ExtResource("1_utwgv")
+region = Rect2(50, 50, 50, 50)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utwgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8ejw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ne6f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jx3gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4n30")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
