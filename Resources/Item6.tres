@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bflohu2gffmfq"]
+
+[ext_resource type="Texture2D" uid="uid://bxtaim4rp7yby" path="res://Resources/eau.png" id="1_7hfrk"]
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="1_yqs1d"]
+
+[resource]
+script = ExtResource("1_yqs1d")
+icon = ExtResource("1_7hfrk")
+name = "Eau"
+cost = 2.0
+id = 6
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"
