@@ -21,6 +21,7 @@ func _ready():
 	hungry = 100
 	stamina = 100
 	moneyIndicator = 100.0
+	print("Player added to group: ", get_groups(), " + ", moneyIndicator)
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)
@@ -193,114 +194,114 @@ func _calc_phase_x():
 func _calc_phase_y():
 	phase_offset_y = asin(clamp($AnimatedSprite2D.position.y / INTENSITY, -1.0, 1.0)) - time * FREQUENCY
 
+# Remplace tous les was_up/was_down/was_left/was_right/was_up_left/etc.
+var was_moving_x = false  # oscillation sur X (composante verticale du mouvement)
+var was_moving_y = false  # oscillation sur Y (composante horizontale du mouvement)
+
+var sign_x = 1
+var sign_y = 1
+
+func _ensure_phase_x(new_sign: int):
+	if not was_moving_x:
+		phase_offset_x = asin(clamp($AnimatedSprite2D.position.x / (new_sign * INTENSITY), -1.0, 1.0)) - time * FREQUENCY
+	elif new_sign != sign_x:
+		phase_offset_x += PI
+	sign_x = new_sign
+
+func _ensure_phase_y(new_sign: int):
+	if not was_moving_y:
+		phase_offset_y = asin(clamp($AnimatedSprite2D.position.y / (new_sign * INTENSITY), -1.0, 1.0)) - time * FREQUENCY
+	elif new_sign != sign_y:
+		phase_offset_y += PI
+	sign_y = new_sign
+
 func _reset():
-	was_up = false
-	was_down = false
-	was_left = false
-	was_right = false
-	was_up_left = false
-	was_up_right = false
-	was_down_left = false
-	was_down_right = false
+	was_moving_x = false
+	was_moving_y = false
+	sign_x = 1
+	sign_y = 1
 	self.velocity = Vector2(0, 0)
-	#$AnimatedSprite2D.position.x = lerp($AnimatedSprite2D.position.x, 0.0, 10.0 * delta)
-	#$AnimatedSprite2D.position.y = lerp($AnimatedSprite2D.position.y, 0.0, 10.0 * delta)
 
 func move(delta: float):
+	var moving_x = false
+	var moving_y = false
+
 	match current_direction:
 		direction.UP:
-			if not was_up:
-				_calc_phase_x()
-				was_up = true
+			moving_x = true
+			_ensure_phase_x(1)
 			self.velocity = Vector2(0, -SPEED)
 			$AnimatedSprite2D.position.x = sin(time * FREQUENCY + phase_offset_x) * INTENSITY
 			$AnimatedSprite2D.position.y = lerp($AnimatedSprite2D.position.y, 0.0, 10.0 * delta)
 			$AnimatedSprite2D.play("up")
 
 		direction.DOWN:
-			if not was_down:
-				_calc_phase_x()
-				was_down = true
+			moving_x = true
+			_ensure_phase_x(1)
 			self.velocity = Vector2(0, SPEED)
 			$AnimatedSprite2D.position.x = sin(time * FREQUENCY + phase_offset_x) * INTENSITY
 			$AnimatedSprite2D.position.y = lerp($AnimatedSprite2D.position.y, 0.0, 10.0 * delta)
 			$AnimatedSprite2D.play("down")
 
 		direction.LEFT:
-			if not was_left:
-				_calc_phase_y()
-				was_left = true
+			moving_y = true
+			_ensure_phase_y(1)
 			self.velocity = Vector2(-SPEED, 0)
 			$AnimatedSprite2D.position.y = sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.position.x = lerp($AnimatedSprite2D.position.x, 0.0, 10.0 * delta)
 			$AnimatedSprite2D.play("left")
 
 		direction.RIGHT:
-			if not was_right:
-				_calc_phase_y()
-				was_right = true
+			moving_y = true
+			_ensure_phase_y(1)
 			self.velocity = Vector2(SPEED, 0)
 			$AnimatedSprite2D.position.y = sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.position.x = lerp($AnimatedSprite2D.position.x, 0.0, 10.0 * delta)
 			$AnimatedSprite2D.play("right")
 
 		direction.UP_LEFT:
-			if not was_up_left:
-				_calc_phase_x()
-				_calc_phase_y()
-				was_up_left = true
+			moving_x = true; moving_y = true
+			_ensure_phase_x(1); _ensure_phase_y(-1)
 			self.velocity = cartesian_to_isometric(Vector2(-SPEED, 0))
-			$AnimatedSprite2D.position.x = sin(time * FREQUENCY + phase_offset_x) * INTENSITY
+			$AnimatedSprite2D.position.x =  sin(time * FREQUENCY + phase_offset_x) * INTENSITY
 			$AnimatedSprite2D.position.y = -sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.play("up_left")
 
 		direction.UP_RIGHT:
-			if not was_up_right:
-				_calc_phase_x()
-				_calc_phase_y()
-				was_up_right = true
+			moving_x = true; moving_y = true
+			_ensure_phase_x(1); _ensure_phase_y(1)
 			self.velocity = cartesian_to_isometric(Vector2(0, -SPEED))
 			$AnimatedSprite2D.position.x = sin(time * FREQUENCY + phase_offset_x) * INTENSITY
 			$AnimatedSprite2D.position.y = sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.play("up_right")
 
 		direction.DOWN_LEFT:
-			if not was_down_left:
-				_calc_phase_x()
-				_calc_phase_y()
-				was_down_left = true
+			moving_x = true; moving_y = true
+			_ensure_phase_x(-1); _ensure_phase_y(-1)
 			self.velocity = cartesian_to_isometric(Vector2(0, SPEED))
 			$AnimatedSprite2D.position.x = -sin(time * FREQUENCY + phase_offset_x) * INTENSITY
 			$AnimatedSprite2D.position.y = -sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.play("down_left")
 
 		direction.DOWN_RIGHT:
-			if not was_down_right:
-				_calc_phase_x()
-				_calc_phase_y()
-				was_down_right = true
+			moving_x = true; moving_y = true
+			_ensure_phase_x(-1); _ensure_phase_y(1)
 			self.velocity = cartesian_to_isometric(Vector2(SPEED, 0))
 			$AnimatedSprite2D.position.x = -sin(time * FREQUENCY + phase_offset_x) * INTENSITY
-			$AnimatedSprite2D.position.y = sin(time * FREQUENCY + phase_offset_y) * INTENSITY
+			$AnimatedSprite2D.position.y =  sin(time * FREQUENCY + phase_offset_y) * INTENSITY
 			$AnimatedSprite2D.play("down_right")
 
 		direction.IDLE_UP:
-
-			_reset()
-			$AnimatedSprite2D.play("idle_up")
-			
+			_reset(); $AnimatedSprite2D.play("idle_up")
 		direction.IDLE_UP_LEFT:
-			_reset()
-			$AnimatedSprite2D.play("idle_up_left")
-			
+			_reset(); $AnimatedSprite2D.play("idle_up_left")
 		direction.IDLE_DOWN:
-			_reset()
-			$AnimatedSprite2D.play("idle_down")
-			
+			_reset(); $AnimatedSprite2D.play("idle_down")
 		direction.IDLE_DOWN_LEFT:
-			_reset()
-			$AnimatedSprite2D.play("idle_down_left")
+			_reset(); $AnimatedSprite2D.play("idle_down_left")
 
+	was_moving_x = moving_x
+	was_moving_y = moving_y
 	move_and_slide()
 
 func cartesian_to_isometric(cartesian):

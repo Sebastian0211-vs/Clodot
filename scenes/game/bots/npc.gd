@@ -7,6 +7,9 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @onready var textbox = $Text
 @onready var dialogbox = $Dialog/PanelContainer/Label
 @onready var dialogPanel = $Dialog/PanelContainer
+@onready var dialogbox = $Dialog/Label
+@export var items : Array[Item]
+
 
 const DIALOGUES = {
 	0: ["Bonjour !", "Belle journée !", "Tu as vu mes clés ?", "J'aime les chats", "Sympa par ici"],
@@ -31,6 +34,7 @@ var sprites = {
 }
 
 var player_nearby = false
+var _is_shopping = false
 var _velocity: Vector2 = Vector2.ZERO
 var _state: State = State.OFFSCREEN_INITIAL
 var _offscreen_timer: float = 0.0
@@ -49,6 +53,10 @@ func _ready() -> void:
 	visible = false
 	dialogbox.visible = false
 	ConversationManager.conversation_ended.connect(_on_conv_ended)
+
+func _shop_time():
+	Ui.open_mode(Ui.MODE.SHOP,items)
+	_is_shopping = true
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
@@ -126,6 +134,8 @@ func _on_conv_ended():  # dans le NPC
 	start = false
 	if id != 4:
 		_velocity = direction * 10
+	else:
+		_is_shopping = false
 	_show_textbox()
 
 func _start_discussion():
@@ -133,6 +143,8 @@ func _start_discussion():
 	_velocity = Vector2(0.0,0.0)
 	_hide_textbox()
 	_bounce_both()
+	if id == 4 and _is_shopping == false:
+		_shop_time()
 
 func _bounce_both():
 	var tween = create_tween()

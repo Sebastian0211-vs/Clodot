@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cegj6it41nmc3"]
+
+[ext_resource type="Script" uid="uid://demxj5bjl7gam" path="res://scenes/game/shops/Ui.gd" id="1_k8aur"]
+[ext_resource type="Script" uid="uid://dbnjrvld7o0pg" path="res://scenes/game/shops/Manager.gd" id="2_as8rs"]
+[ext_resource type="Script" uid="uid://e4r7nai6a7wv" path="res://scenes/game/shops/Inventory.gd" id="3_w8ici"]
+[ext_resource type="PackedScene" uid="uid://fpcn0lmwd8fl" path="res://scenes/game/shops/slot.tscn" id="4_jcirm"]
+[ext_resource type="Script" uid="uid://p705w1csdkx1" path="res://scenes/game/shops/Shop.gd" id="5_v2otl"]
+
+[node name="UI" type="CanvasLayer" unique_id=1647264914]
+script = ExtResource("1_k8aur")
+
+[node name="Manager" type="Panel" parent="." unique_id=1108868341]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_as8rs")
+
+[node name="Inventory" type="GridContainer" parent="Manager" unique_id=1309108327]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 35.0
+offset_top = 66.0
+offset_right = 235.0
+offset_bottom = 166.0
+columns = 3
+script = ExtResource("3_w8ici")
+
+[node name="Slot" parent="Manager/Inventory" unique_id=321017764 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot2" parent="Manager/Inventory" unique_id=2114195993 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot3" parent="Manager/Inventory" unique_id=1916837039 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot4" parent="Manager/Inventory" unique_id=88982227 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot5" parent="Manager/Inventory" unique_id=1617854405 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot6" parent="Manager/Inventory" unique_id=1760043855 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot7" parent="Manager/Inventory" unique_id=404926178 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot8" parent="Manager/Inventory" unique_id=610121514 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot9" parent="Manager/Inventory" unique_id=795556794 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Shop" type="GridContainer" parent="Manager" unique_id=1270974228]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 161.0
+offset_top = 66.0
+offset_right = 604.0
+offset_bottom = 509.0
+columns = 3
+script = ExtResource("5_v2otl")
+
+[node name="Slot" parent="Manager/Shop" unique_id=627529569 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot2" parent="Manager/Shop" unique_id=859782672 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot3" parent="Manager/Shop" unique_id=380679830 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot4" parent="Manager/Shop" unique_id=766084915 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot5" parent="Manager/Shop" unique_id=1825238700 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot6" parent="Manager/Shop" unique_id=586018165 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot7" parent="Manager/Shop" unique_id=1461778766 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot8" parent="Manager/Shop" unique_id=1916021924 instance=ExtResource("4_jcirm")]
+layout_mode = 2
+
+[node name="Slot9" parent="Manager/Shop" unique_id=557955734 instance=ExtResource("4_jcirm")]
+layout_mode = 2
