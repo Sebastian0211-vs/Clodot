@@ -16,7 +16,7 @@ const DIALOGUES = {
 	2: ["Tchao !", "Ça va ou quoi ?", "T'as où le chalet ?", "Tu veux graille un truc ?", "Ca roule"],
 	3: ["Salut !", "C'est moi, le jobelin !", "Entrain de jobeliner et toi ?", "Oui ?", "Rejoins les jobelins !"],
 	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Venez !", "Soldes !"],
-	5: ["Shalom !", "C'est compliqué...", "Hamas, Hamas !", "J'ai le droit de me défendre", "Bibi out"],
+	5: ["Deal ou pas deal ?", "Le marché est porteur...", "J'ai des actions !", "Mon comptable est génial", "On signe le contrat ?"],
 	6: ["Ina ina ina !", "Takoooo !", "*bloop*", "T'as vu mon tentacule ?", "Je dessine, donc je suis"],
 	7: ["Sus...", "*vent*", "C'était pas moi", "T'es l'imposteur", "Emergency meeting !"],
 }
@@ -58,11 +58,11 @@ const EXPECTED_ANSWERS = {
 		"Soldes !":                  { "answer": ["solde", "fric", "biere"],     "reward": 1.00 },
 	},
 	5: {
-		"Shalom !":                     { "answer": ["shalom", "sou", "bonjour"],    "reward": 0.10 },
-		"C'est compliqué...":           { "answer": ["clope", "biere", "dur"],       "reward": 0.25 },
-		"Hamas, Hamas !":               { "answer": ["hamas", "non", "stop"],        "reward": 0.50 },
-		"J'ai le droit de me défendre": { "answer": ["droit", "thune", "ok"],        "reward": 0.35 },
-		"Bibi out":                     { "answer": ["bibi", "fric", "bye"],         "reward": 0.75 },
+		"Deal ou pas deal ?":         { "answer": ["deal", "oui", "ok"],          "reward": 0.10 },
+		"Le marché est porteur...":   { "answer": ["marche", "bourse", "argent"], "reward": 0.25 },
+		"J'ai des actions !":         { "answer": ["action", "bourse", "fric"],   "reward": 0.50 },
+		"Mon comptable est génial":   { "answer": ["compte", "thune", "impot"],   "reward": 0.35 },
+		"On signe le contrat ?":      { "answer": ["contrat", "signe", "stylo"],  "reward": 0.75 },
 	},
 	6: {
 		"Ina ina ina !":            { "answer": ["ina", "sou", "hein"],           "reward": 0.10 },

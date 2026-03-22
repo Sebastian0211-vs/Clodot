@@ -22,7 +22,7 @@ const DIALOGUES = {
 	2: ["Tchao !", "Ça va ou quoi ?", "T'as où le chalet ?", "Tu veux graille un truc ?", "Ca roule"],
 	3: ["Salut !", "C'est moi, le jobelin !", "Entrain de jobeliner et toi ?", "Oui ?", "Rejoins les jobelins !"],
 	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Venez !", "Soldes !"],
-	5: ["Shalom !", "C'est compliqué...", "Hamas, Hamas !", "J'ai le droit de me défendre", "Bibi out"],
+	5: ["Deal ou pas deal ?", "Le marché est porteur...", "J'ai des actions !", "Mon comptable est génial", "On signe le contrat ?"],
 	6: ["Ina ina ina !", "Takoooo !", "*bloop*", "T'as vu mon tentacule ?", "Je dessine, donc je suis"],
 	7: ["Sus...", "*vent*", "C'était pas moi", "T'es l'imposteur", "Emergency meeting !"],
 }
