@@ -11,14 +11,14 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 
 
 const DIALOGUES = {
-	0: ["Bonjour !", "Belle journée !", "Tu as vu mes clés ?", "J'aime les chats", "Sympa par ici"],
+	0: ["Bonjour !", "Belle journée !", "Tu as besoin d'argent ?", "Ne m'approche pas !", "C'était sympa, jusqu'à que t'arrives."],
 	1: ["...", "Blah blah", "Requin en peluche", "Doux et bleu", "Serre-moi fort"],
-	2: ["Ni hao !", "Ça roule ?", "T'as faim ?", "On mange quoi ?", "Bonne chance !"],
-	3: ["Jobelin !", "Sacré jobelin", "Jobelinade", "Jobelos", "Jobeline forever"],
-	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Revenez vite", "Soldes !"],
-	5: ["Mon temps c'est de l'argent", "J'ai trois yachts, et toi ?", "Appelez mon assistant", "Marché conclu !", "Je rachète cet endroit"],
-	6: ["Ina ina ina !", "Takoooo !", "Je suis un Tako !", "Ninomae Ina'nis !", "Bloup bloup ~"],
-	7: ["...", "C'était qui ?!", "T'as l'air suspect", "Je vote rouge", "IMPOSTEUR !!!"],
+	2: ["Tchao !", "Ça va ou quoi ?", "T'as où le chalet ?", "Tu veux graille un truc ?", "Ca roule"],
+	3: ["Salut !", "C'est moi, le jobelin !", "Entrain de jobeliner et toi ?", "Oui ?", "Rejoins les jobelins !"],
+	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Venez !", "Soldes !"],
+	5: ["Shalom !", "C'est compliqué...", "Hamas, Hamas !", "J'ai le droit de me défendre", "Bibi out"],
+	6: ["Ina ina ina !", "Takoooo !", "*bloop*", "T'as vu mon tentacule ?", "Je dessine, donc je suis"],
+	7: ["Sus...", "*vent*", "C'était pas moi", "T'es l'imposteur", "Emergency meeting !"],
 }
 
 var sprites = {
@@ -139,13 +139,13 @@ func _input(event):
 			ConversationManager.advance()
 		
 
-func _on_conv_ended():  # dans le NPC
+func _on_conv_ended():
 	start = false
 	if id != 4:
 		_velocity = direction * _speed
-	else:
-		_is_shopping = false
-		Ui.close_mode()
+	#else:
+	#	_is_shopping = false
+	#	Ui.close_mode()
 	_show_textbox()
 
 func _start_discussion():

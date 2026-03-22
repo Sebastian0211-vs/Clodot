@@ -17,37 +17,81 @@ var moneyIndicator = 0.0
 
 var _answer_bubbles = []
 
+
 func _on_answers_updated(answers: Array):
 	_on_answers_cleared()
 	var count = answers.size()
-	var radius = 4.0
-	for i in count:
-		var angle = (2 * PI / count) * i - PI / 2
-		var offset = Vector2(cos(angle), sin(angle)) * radius
+	var spacing = 20.0
 
+	for i in count:
 		var bubble = Label.new()
 		bubble.text = answers[i]
 		bubble.add_theme_font_size_override("font_size", 6)
-		bubble.position = offset + Vector2(0, -5)
 		bubble.modulate.a = 0.0
+		bubble.set_meta("phase", randf() * TAU)
+		bubble.position = Vector2(- (count - 1) * spacing / 2.0 + i * spacing, -20.0)
 		add_child(bubble)
+		bubble.z_index = 10
+		_answer_bubbles.append(bubble)
 
 		var tween = bubble.create_tween()
 		tween.tween_property(bubble, "modulate:a", 1.0, 0.3)
-
-		_answer_bubbles.append(bubble)
 
 func _on_answers_cleared():
 	for b in _answer_bubbles:
 		b.queue_free()
 	_answer_bubbles.clear()
 
+var _failing = false
+
+func trigger_success() -> void:
+	if _answer_bubbles.is_empty():
+		return
+	var count = _answer_bubbles.size()
+	for i in count:
+		var bubble = _answer_bubbles[i]
+		var base_x = bubble.position.x
+		
+		var shake = bubble.create_tween()
+		shake.tween_property(bubble, "modulate", Color(0.59,0.78,0.74), 0.08)
+
+	await get_tree().create_timer(0.35 + 0.4 + count * 0.04 + 0.2).timeout
+	_on_answers_cleared()
+
+func trigger_fail() -> void:
+	if _failing or _answer_bubbles.is_empty():
+		return
+	_failing = true
+
+	var count = _answer_bubbles.size()
+	for i in count:
+		var bubble = _answer_bubbles[i]
+		var base_x = bubble.position.x
+		
+		var shake = bubble.create_tween()
+		shake.tween_property(bubble, "modulate", Color(0.88,0.67,0.73), 0.08)
+		shake.tween_property(bubble, "position:x", base_x + 4.0, 0.05)
+		shake.tween_property(bubble, "position:x", base_x - 4.0, 0.05)
+		shake.tween_property(bubble, "position:x", base_x + 6.0, 0.05)
+		shake.tween_property(bubble, "position:x", base_x - 6.0, 0.05)
+		shake.tween_property(bubble, "position:x", base_x + 4.0, 0.05)
+		shake.tween_property(bubble, "position:x", base_x - 4.0, 0.05)
+		shake.tween_property(bubble, "position:x", base_x, 0.05)
+		
+		shake.tween_property(bubble, "position:y", bubble.position.y + randf_range(50.0, 90.0), 0.4) \
+			 .set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN).set_delay(i * 0.04)
+		shake.tween_property(bubble, "modulate:a", 0.0, 0.2)
+
+	await get_tree().create_timer(0.35 + 0.4 + count * 0.04 + 0.2).timeout
+	_on_answers_cleared()
+	_failing = false
+
 func _ready():
 	add_to_group("player")
-	thirsty = 100
-	hungry = 100
-	stamina = 100
-	moneyIndicator = 100.0
+	thirsty = 70
+	hungry = 50
+	stamina = 90
+	moneyIndicator = 0.35
 	print("Player added to group: ", get_groups(), " + ", moneyIndicator)
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
@@ -69,9 +113,9 @@ func _on_phoneme_played(label: String):
 	fl.init(label)
 	
 #PER SECONDS
-var THIRSTFACTOR = 0.1
-var HUNGERFACTOR = 0.1
-var STAMINAFACTOR = 0.1
+var THIRSTFACTOR = 1
+var HUNGERFACTOR = 0.5
+var STAMINAFACTOR = 0.6
 	
 var locked = false
 
@@ -81,10 +125,17 @@ func _on_conv_started(_pnj):
 func _on_conv_ended():
 	locked = false
 
+
 func _process(delta):
+	time += delta
+	for i in _answer_bubbles.size():
+		if _failing:
+			break
+		var bubble = _answer_bubbles[i]
+		var phase = bubble.get_meta("phase")
+		bubble.position.y = -20.0 + sin(time * 1.2 + phase) * 3.0
 	if locked:
 		return
-	time += delta
 	update_attributes(delta)
 	get_input()
 	set_direction()
@@ -112,9 +163,14 @@ func _set_stamina(delta: float):
 	staminaBar.stamina = stamina
 	
 func _set_money(delta: float):
-	#moneyIndicator += 1
 	moneyLabel.text = str(moneyIndicator)
 	moneyBackground.text = str(moneyIndicator)
+
+func increaseMoney(value):
+	print("AUGMENTE MOULA")
+	moneyIndicator += value
+	print("POST MONEY INCREASE : ", moneyIndicator)
+
 
 enum direction{
 	UP,
