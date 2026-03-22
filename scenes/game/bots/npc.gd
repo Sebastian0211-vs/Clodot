@@ -14,6 +14,9 @@ const DIALOGUES = {
 	2: ["Ni hao !", "Ça roule ?", "T'as faim ?", "On mange quoi ?", "Bonne chance !"],
 	3: ["Jobelin !", "Sacré jobelin", "Jobelinade", "Jobelos", "Jobeline forever"],
 	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Revenez vite", "Soldes !"],
+	5: ["Mon temps c'est de l'argent", "J'ai trois yachts, et toi ?", "Appelez mon assistant", "Marché conclu !", "Je rachète cet endroit"],
+	6: ["Ina ina ina !", "Takoooo !", "Je suis un Tako !", "Ninomae Ina'nis !", "Bloup bloup ~"],
+	7: ["...", "C'était qui ?!", "T'as l'air suspect", "Je vote rouge", "IMPOSTEUR !!!"],
 }
 
 var sprites = {
@@ -22,6 +25,9 @@ var sprites = {
 	2: "chingchong.tres",
 	3: "jobelin.tres",
 	4: "shop.tres",
+	5: "bigN.tres",
+	6: "tako.tres",
+	7: "sus.tres"
 }
 
 var player_nearby = false
@@ -41,7 +47,7 @@ func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
 	$Area2D.body_exited.connect(_on_body_exited)
 	visible = false
-	dialogbox.visible = false 
+	dialogbox.visible = false
 	ConversationManager.conversation_ended.connect(_on_conv_ended)
 
 func _on_body_entered(body):
@@ -56,7 +62,7 @@ func show_dialogue_line(line: String) -> void:
 	dialogPanel.visible = true
 	dialogPanel.modulate.a = 0.0
 
-	
+
 	var tween = create_tween()
 	tween.tween_property(dialogbox, "modulate:a", 1.0, 0.2)
 	tween.tween_property(dialogPanel, "modulate:a", 1.0, 0.2)
@@ -113,7 +119,7 @@ func _input(event):
 			if id != 4:
 				_velocity = direction*10
 			_show_textbox()
-			ConversationManager.advance() 
+			ConversationManager.advance()
 		
 
 func _on_conv_ended():  # dans le NPC
