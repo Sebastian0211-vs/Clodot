@@ -1,7 +1,7 @@
 extends Node
 
 @export var character_scene: PackedScene
-@export var spawn_interval: float = 2.0
+@export var spawn_interval: float = 1.0
 @export var move_speed: float = 15.0
 @export var camera: Camera2D
 

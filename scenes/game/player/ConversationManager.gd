@@ -17,9 +17,68 @@ const DIALOGUES = {
 	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Revenez vite", "Soldes !"],
 }
 
+const EXPECTED_ANSWERS = {
+	0: {
+		"Bonjour !":           { "answer": "bonjour",  "reward": 10 },
+		"Belle journée !":     { "answer": "beau",     "reward": 5  },
+		"Tu as vu mes clés ?": { "answer": "cle",      "reward": 15 },
+		"J'aime les chats":    { "answer": "chat",     "reward": 8  },
+		"Sympa par ici":       { "answer": "sympa",    "reward": 6  },
+	},
+	1: {
+		"...":               { "answer": "silence",  "reward": 5  },
+		"Blah blah":         { "answer": "blah",     "reward": 5  },
+		"Requin en peluche": { "answer": "requin",   "reward": 20 },
+		"Doux et bleu":      { "answer": "doux",     "reward": 10 },
+		"Serre-moi fort":    { "answer": "fort",     "reward": 15 },
+	},
+	2: {
+		"Ni hao !":      { "answer": "nihao",   "reward": 12 },
+		"Ça roule ?":    { "answer": "roule",   "reward": 8  },
+		"T'as faim ?":   { "answer": "faim",    "reward": 10 },
+		"On mange quoi ?":{ "answer": "manger", "reward": 10 },
+		"Bonne chance !":{ "answer": "chance",  "reward": 7  },
+	},
+	3: {
+		"Jobelin !":          { "answer": "jobelin",   "reward": 20 },
+		"Sacré jobelin":      { "answer": "sacre",     "reward": 15 },
+		"Jobelinade":         { "answer": "jobelinade","reward": 25 },
+		"Jobelos":            { "answer": "jobelo",    "reward": 15 },
+		"Jobeline forever":   { "answer": "forever",   "reward": 10 },
+	},
+	4: {
+		"Bienvenue !":              { "answer": "merci",    "reward": 5  },
+		"On a tout ce qu'il faut":  { "answer": "super",    "reward": 8  },
+		"Bonne affaire aujourd'hui":{ "answer": "affaire",  "reward": 15 },
+		"Revenez vite":             { "answer": "revenir",  "reward": 10 },
+		"Soldes !":                 { "answer": "solde",    "reward": 20 },
+	},
+}
+
 var _current_npc = null
 var _line_index: int = 0
 
+# Dans ConversationManager
+var _spoken_buffer: String = ""
+
+func _ready() -> void:
+	# connecte le signal d'InputManager
+	InputManager.phoneme_played.connect(_on_phoneme_played)
+
+func _on_phoneme_played(label: String) -> void:
+	if not in_conversation:
+		return
+	_spoken_buffer += label 
+	check_answer(_spoken_buffer)
+	print("buffer: ", _spoken_buffer)
+
+func advance() -> void:
+	_spoken_buffer = ""  # reset le buffer
+	_line_index += 1
+	if _line_index >= _current_npc.dialogue_lines.size():
+		end_conversation()
+	else:
+		_show_line()
 
 func start_conversation(pnj) -> void:
 	if in_conversation:
@@ -45,16 +104,48 @@ func start_conversation(pnj) -> void:
 	
 	emit_signal("conversation_started", pnj)
 
-func advance() -> void:
-	_line_index += 1
-	if _line_index >= _current_npc.dialogue_lines.size():
-		end_conversation()
-	else:
-		_show_line()
+
+var _expected_answer: String = ""
+var _current_reward: int = 0  # ← ajoute ça
 
 func _show_line() -> void:
 	var line = _current_npc.dialogue_lines[_line_index]
 	_current_npc.show_dialogue_line(line)
+	
+	var npc_id = _current_npc.id
+	if EXPECTED_ANSWERS.has(npc_id) and EXPECTED_ANSWERS[npc_id].has(line):
+		_expected_answer = EXPECTED_ANSWERS[npc_id][line]["answer"]
+		_current_reward  = EXPECTED_ANSWERS[npc_id][line]["reward"]
+	else:
+		_expected_answer = ""
+		_current_reward  = 0
+
+func check_answer(spoken_text: String) -> int:
+	if _expected_answer == "":
+		print("pas de réponse attendue pour cette ligne")
+		_spoken_buffer = ""
+		return 0
+	
+	print("attendu: ", _expected_answer, " | reçu: ", spoken_text.to_lower())
+	
+	if _expected_answer == spoken_text.to_lower():
+		print("Bonne réponse ! +", _current_reward, " thunes")
+		player.moneyIndicator += _current_reward
+		_spoken_buffer = ""
+		end_conversation()
+		return 1
+		
+	if _expected_answer.contains(spoken_text.to_lower()):
+		print("BONNE REPONSE EN COURS HIHI BIEN OUEJ")
+		
+		return 2
+		
+	else:
+		print("Mauvaise réponse...")
+		_spoken_buffer = ""
+
+		end_conversation()
+		return -1
 
 func end_conversation() -> void:
 	if not in_conversation:

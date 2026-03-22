@@ -131,7 +131,6 @@ func _bounce_both():
 var dialogue_lines: Array = []
 var _line_index: int = 0
 
-# Dans setup(), après avoir chargé le sprite :
 func setup(dir: Vector2, velocity: float, iD) -> void:
 	id = iD
 	direction = dir.normalized()
