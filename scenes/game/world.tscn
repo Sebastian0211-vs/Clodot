@@ -15,8 +15,9 @@ func _ready() -> void:
 	add_child(p)
 	InputManager._players.append(p)
 	var audioplayer_id = len(InputManager._players) - 1
-	var path = \"res://audio2/audio_effects/hello.wav\"
+	var path = \"res://audio2/audio_effects/song.wav\"
 	var stream: AudioStreamWAV = load(path).duplicate() 
+	
 
 	# Enable looping on the stream
 	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
@@ -25,6 +26,7 @@ func _ready() -> void:
 
 	var player: AudioStreamPlayer = InputManager._players[audioplayer_id]
 	player.stream = stream
+	player.volume_db = -17.0
 	player.play()
 
 func _process(delta: float) -> void:
