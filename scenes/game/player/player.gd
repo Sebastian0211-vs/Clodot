@@ -21,6 +21,7 @@ func _ready():
 	hungry = 100
 	stamina = 100
 	moneyIndicator = 100.0
+	print("Player added to group: ", get_groups(), " + ", moneyIndicator)
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)

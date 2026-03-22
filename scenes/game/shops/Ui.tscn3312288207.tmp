@@ -23,8 +23,8 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = 35.0
 offset_top = 66.0
-offset_right = 235.0
-offset_bottom = 166.0
+offset_right = 553.0
+offset_bottom = 584.0
 columns = 3
 script = ExtResource("3_w8ici")
 
