@@ -87,20 +87,20 @@ var _current_npc = null
 var _line_index: int = 0
 
 # Dans ConversationManager
-var _spoken_buffer: String = ""
+var _spoken_buffer: Array = []
 
 func _ready() -> void:
 	InputManager.phoneme_played.connect(_on_phoneme_played)
 
-func _on_phoneme_played(label: String) -> void:
+func _on_phoneme_played(phoneme: String) -> void:
 	if not in_conversation:
 		return
-	_spoken_buffer += label
+	_spoken_buffer.append(phoneme)
 	check_answer(_spoken_buffer)
 	print("buffer: ", _spoken_buffer)
 
 func advance() -> void:
-	_spoken_buffer =""  # reset le buffer
+	_spoken_buffer =[]  # reset le buffer
 	_line_index += 1
 	if _line_index >= _current_npc.dialogue_lines.size():
 		end_conversation()
@@ -160,20 +160,20 @@ func _show_line() -> void:
 func array_contains_all(main: Array, subset: Array) -> bool:
 	return subset.all(func(e): return main.has(e))
 
-func check_answer(spoken_text: String) -> void:
+func check_answer(spoken_text: Array) -> void:
 	var foundtyping = false
 	for answer in _expected_answers:
 		if _expected_answers == []:
-			_spoken_buffer = ""
+			_spoken_buffer = []
 			return 
 		var phonem_answer = InputManager.decompose_to_phonemes(answer)
-		var phonem_spoken_text = InputManager.decompose_to_phonemes(spoken_text)
+		var phonem_spoken_text = spoken_text
 		
 		print("ANSWER", phonem_answer, "SPOKEN", phonem_spoken_text)
 				
 		if phonem_answer == phonem_spoken_text:
 			player.increaseMoney(_current_reward)
-			_spoken_buffer =""
+			_spoken_buffer = []
 			_expected_answers = []
 			var npc = _current_npc
 			await player.trigger_success()
@@ -188,7 +188,7 @@ func check_answer(spoken_text: String) -> void:
 			return 
 			
 	if !foundtyping:
-		_spoken_buffer =""
+		_spoken_buffer = []
 		var npc = _current_npc
 		await player.trigger_fail()
 		var failure = int(randi() % FAILED.size())

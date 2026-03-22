@@ -5,57 +5,44 @@ const WORD_PAUSE_SEC := 0.14
 const PITCH_VARIANCE := 0.04
 const PAUSE_TOKEN    := ""
 
-signal phoneme_played(label: String)
+signal phoneme_played(phoneme: String)
 
 const BASE_MAP: Dictionary = {
-	KEY_I:  { "label": "i",         "file": "2191_vignette_-i-.mp3"         },
-	KEY_A:  { "label": "a",         "file": "2193_vignette_-a-.mp3"         },
-	KEY_O:  { "label": "ou",        "file": "2195_vignette_-ou-.mp3"        },
-	KEY_U:  { "label": "u",         "file": "2197_vignette_-u-.mp3"         },
-	KEY_N:  { "label": "in",        "file": "2201_vignette_-in-.mp3"        },
-	KEY_M:  { "label": "on",        "file": "2203_vignette_-on-.mp3"        },
-	KEY_W:  { "label": "an",        "file": "2205_vignette_-an-_0.mp3"      },
-	KEY_E:  { "label": "e",   "file": "2207_vignette_-e-.mp3"         },
-	KEY_R:  { "label": "e",  "file": "2209_vignette_-e-.mp3"         },
-	KEY_0:  { "label": "o",   "file": "2211_vignette_-o-ferme.mp3"    },
-	KEY_9:  { "label": "o",  "file": "2213_vignette_-o-ouvert.mp3"   },
-	KEY_8:  { "label": "eu",  "file": "2215_vignette_-eu-ferme.mp3"   },
-	KEY_7:  { "label": "eu", "file": "2217_vignette_-eu-ouvert.mp3"  },
-	KEY_F9: { "label": "ua",        "file": "2569_vignette_-ua-.mp3"        },
-	KEY_F10:{ "label": "wa",        "file": "2571_vignette_-wa-.mp3"        },
-	KEY_P:        { "label": "pa",  "file": "2539_vignette_-pa-.mp3"        },
-	KEY_F1:       { "label": "p",   "file": "2540_vignette_-p-_0.mp3"       },
-	KEY_B:        { "label": "ba",  "file": "2541_vignette_-ba-.mp3"        },
-	KEY_F2:       { "label": "b",   "file": "2542_vignette_-b-_0.mp3"       },
-	KEY_T:        { "label": "ta",  "file": "2543_vignette_-ta-.mp3"        },
-	KEY_F3:       { "label": "t",   "file": "2544_vignette_-t-.mp3"         },
-	KEY_D:        { "label": "da",  "file": "2545_vignette_-da-.mp3"        },
-	KEY_F4:       { "label": "d",   "file": "2546_vignette_-d-.mp3"         },
-	KEY_K:        { "label": "ka",  "file": "2547_vignette_-ka-.mp3"        },
-	KEY_C:        { "label": "k",   "file": "2548_vignette_-k-.mp3"         },
-	KEY_G:        { "label": "ga",  "file": "2549_vignette_-ga-.mp3"        },
-	KEY_H:        { "label": "g",   "file": "2550_vignette_-g-.mp3"         },
-	KEY_COMMA:    { "label": "ma",  "file": "2551_vignette_-ma-.mp3"        },
-	KEY_SEMICOLON:{ "label": "m",   "file": "2552_vignette_-m-.mp3"         },
-	KEY_J:        { "label": "na",  "file": "2553_vignette_-na-.mp3"        },
-	KEY_L:        { "label": "n",   "file": "2554_vignette_-n-.mp3"         },
-	KEY_1:        { "label": "fa",  "file": "2555_vignette_-fa-.mp3"        },
-	KEY_F:        { "label": "f",   "file": "2556_vignette_-f-.mp3"         },
-	KEY_2:        { "label": "va",  "file": "2557_vignette_-va-.mp3"        },
-	KEY_V:        { "label": "v",   "file": "2558_vignette_-v-_0.mp3"       },
-	KEY_3:        { "label": "sa",  "file": "2559_vignette_-sa-.mp3"        },
-	KEY_S:        { "label": "s",   "file": "2560_vignette_-s-.mp3"         },
-	KEY_4:        { "label": "za",  "file": "2561_vignette_-za-.mp3"        },
-	KEY_Z:        { "label": "z",   "file": "2562_vignette_-z-.mp3"         },
-	KEY_5:        { "label": "cha", "file": "2563_vignette_-cha-.mp3"       },
-	KEY_Q:        { "label": "ch",  "file": "2564_vignette_-ch-.mp3"        },
-	KEY_6:        { "label": "gea", "file": "2565_vignette_-gea-.mp3"       },
-	KEY_X:        { "label": "ge",  "file": "2566_vignette_-ge-.mp3"        },
-	KEY_Y:        { "label": "ja",  "file": "2567_vignette_-ja-.mp3"        },
-	KEY_F5:       { "label": "la",  "file": "2572_vignette_-la-.mp3"        },
-	KEY_F6:       { "label": "l",   "file": "2573_vignette_-l-.mp3"         },
-	KEY_F7:       { "label": "ra",  "file": "2574_vignette_-ra-.mp3"        },
-	KEY_F8:       { "label": "r",   "file": "2575_vignette_-r-.mp3"         },
+	# ── VOYELLES — touches qui y ressemblent graphiquement ───────────────────
+	KEY_A:  { "label": "a",  "phoneme": "a",  "file": "2193_vignette_-a-.mp3"        },
+	KEY_E:  { "label": "e",  "phoneme": "e",  "file": "2207_vignette_-e-.mp3"        },
+	KEY_R:  { "label": "e",  "phoneme": "ɛ",  "file": "2209_vignette_-e-.mp3"        }, # e ouvert proche de e
+	KEY_I:  { "label": "i",  "phoneme": "i",  "file": "2191_vignette_-i-.mp3"        },
+	KEY_O:  { "label": "o",  "phoneme": "o",  "file": "2211_vignette_-o-ferme.mp3"   },
+	KEY_P:  { "label": "o",  "phoneme": "ɔ",  "file": "2213_vignette_-o-ouvert.mp3"  }, # o ouvert proche de o
+	KEY_U:  { "label": "ou", "phoneme": "u",  "file": "2195_vignette_-ou-.mp3"       },
+	KEY_Y:  { "label": "u",  "phoneme": "y",  "file": "2197_vignette_-u-.mp3"        }, # u français proche de u
+	KEY_W:  { "label": "wa", "phoneme": "wa", "file": "2571_vignette_-wa-.mp3"       }, # w → wa naturel
+	KEY_H:  { "label": "eu", "phoneme": "ø",  "file": "2215_vignette_-eu-ferme.mp3"  }, # central
+	KEY_J:  { "label": "eu", "phoneme": "œ",  "file": "2217_vignette_-eu-ouvert.mp3" }, # à côté de H
+
+	# ── NASALES — regroupées côté droit ──────────────────────────────────────
+	KEY_SEMICOLON: { "label": "an", "phoneme": "ɑ̃", "file": "2205_vignette_-an-_0.mp3" },
+	KEY_K:         { "label": "in", "phoneme": "ɛ̃", "file": "2201_vignette_-in-.mp3"   },
+	KEY_L:         { "label": "on", "phoneme": "ɔ̃", "file": "2203_vignette_-on-.mp3"   },
+
+	# ── CONSONNES — lettre = son ──────────────────────────────────────────────
+	KEY_B:  { "label": "b",  "phoneme": "b",  "file": "2542_vignette_-b-_0.mp3"      },
+	KEY_D:  { "label": "d",  "phoneme": "d",  "file": "2546_vignette_-d-.mp3"        },
+	KEY_F:  { "label": "f",  "phoneme": "f",  "file": "2556_vignette_-f-.mp3"        },
+	KEY_G:  { "label": "g",  "phoneme": "g",  "file": "2550_vignette_-g-.mp3"        },
+	KEY_M:  { "label": "m",  "phoneme": "m",  "file": "2552_vignette_-m-.mp3"        },
+	KEY_N:  { "label": "n",  "phoneme": "n",  "file": "2554_vignette_-n-.mp3"        },
+	KEY_V:  { "label": "v",  "phoneme": "v",  "file": "2558_vignette_-v-_0.mp3"      },
+	KEY_Z:  { "label": "z",  "phoneme": "z",  "file": "2562_vignette_-z-.mp3"        },
+	KEY_S:  { "label": "s",  "phoneme": "s",  "file": "2560_vignette_-s-.mp3"        },
+	KEY_T:  { "label": "t",  "phoneme": "t",  "file": "2544_vignette_-t-.mp3"        },
+	KEY_C:  { "label": "ch", "phoneme": "ʃ",  "file": "2564_vignette_-ch-.mp3"       }, # c → ch intuitif
+	KEY_X:  { "label": "ge", "phoneme": "ʒ",  "file": "2566_vignette_-ge-.mp3"       }, # x → son proche
+	KEY_Q:  { "label": "k",  "phoneme": "k",  "file": "2548_vignette_-k-.mp3"        }, # q → k naturel
+	KEY_1:  { "label": "l",  "phoneme": "l",  "file": "2573_vignette_-l-.mp3"      }, # ✅ L → l
+	KEY_2: { "label": "p", "phoneme": "p", "file": "2540_vignette_-p-_0.mp3"     },
+	KEY_3: { "label": "r", "phoneme": "ʁ", "file": "2575_vignette_-r-.mp3"       },
 }
 
 # Isolated consonant/vowel sounds
@@ -319,6 +306,6 @@ func _input(event: InputEvent) -> void:
 		print("[InputManager] Key pressed: ", OS.get_keycode_string(keycode),
 			  "  →  ", entry["label"])
 		_play_file(entry["file"])
-		phoneme_played.emit(entry["label"])
+		phoneme_played.emit(entry["phoneme"])
 	else:
 		print("[InputManager] Untracked key (keycode: ", keycode, ")")
