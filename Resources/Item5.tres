@@ -7,4 +7,6 @@
 script = ExtResource("1_lbenf")
 icon = ExtResource("1_8c18d")
 name = "Billet de loto"
+cost = 7.5
+id = 5
 metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"

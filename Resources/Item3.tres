@@ -7,4 +7,6 @@
 script = ExtResource("1_u6ufr")
 icon = ExtResource("1_tjrvr")
 name = "Sandwich"
+cost = 1.0
+id = 3
 metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"
