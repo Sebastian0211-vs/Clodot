@@ -5,7 +5,7 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @export var camera: Camera2D
 @export var offscreen_timeout: float = 1.5
 @onready var textbox = $Text
-@onready var dialogbox = $Dialog/PanelContainer/Label
+@onready var dialogtext = $Dialog/PanelContainer/Label
 @onready var dialogPanel = $Dialog/PanelContainer
 
 const DIALOGUES = {
@@ -30,9 +30,12 @@ var _state: State = State.OFFSCREEN_INITIAL
 var _offscreen_timer: float = 0.0
 var textbox_tween: Tween
 var shake_time: float = 0.0
+var shake_time_dialog: float = 0.0
 var base_textbox_pos: Vector2
+var base_dialogtext_pos : Vector2 = Vector2(0.0,-13.0)
 var direction: Vector2 = Vector2.ZERO
 var id = 0
+var _speed = 0.0
 
 func _ready() -> void:
 	add_child(textbox)
@@ -41,7 +44,8 @@ func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
 	$Area2D.body_exited.connect(_on_body_exited)
 	visible = false
-	dialogbox.visible = false 
+	dialogtext.visible = false 
+	dialogPanel.position = dialogtext.position
 	ConversationManager.conversation_ended.connect(_on_conv_ended)
 
 func _on_body_entered(body):
@@ -50,20 +54,18 @@ func _on_body_entered(body):
 		_show_textbox()
 
 func show_dialogue_line(line: String) -> void:
-	dialogbox.text = line
-	dialogbox.visible = true
-	dialogbox.modulate.a = 0.0
+	dialogtext.text = line
+	dialogtext.visible = true
 	dialogPanel.visible = true
 	dialogPanel.modulate.a = 0.0
 
 	
 	var tween = create_tween()
-	tween.tween_property(dialogbox, "modulate:a", 1.0, 0.2)
 	tween.tween_property(dialogPanel, "modulate:a", 1.0, 0.2)
 
 
 func hide_dialogue_bubble() -> void:
-	dialogbox.visible = false
+	dialogtext.visible = false
 	dialogPanel.visible = false
 
 func _on_body_exited(body):
@@ -99,6 +101,14 @@ func _process(delta: float) -> void:
 			sin(shake_time) * 1.0,
 			cos(shake_time * 1.1) * 1.0
 		)
+	if player_nearby and dialogtext.visible:
+		shake_time_dialog += delta * 15.0
+		var new_pos = base_dialogtext_pos + Vector2(
+			sin(shake_time_dialog) * 0.2,
+			cos(shake_time_dialog * 0.3) * 1.0
+		)
+		dialogPanel.position = new_pos + Vector2(0.0,-12.0)
+	
 		
 var start = false
 func _input(event):
@@ -119,7 +129,7 @@ func _input(event):
 func _on_conv_ended():  # dans le NPC
 	start = false
 	if id != 4:
-		_velocity = direction * 10
+		_velocity = direction * _speed
 	_show_textbox()
 
 func _start_discussion():
@@ -139,6 +149,7 @@ var dialogue_lines: Array = []
 var _line_index: int = 0
 
 func setup(dir: Vector2, velocity: float, iD) -> void:
+	_speed = velocity
 	id = iD
 	direction = dir.normalized()
 	_velocity = direction * velocity

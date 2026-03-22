@@ -15,6 +15,33 @@ var hungry = 0
 var stamina = 0
 var moneyIndicator = 0.0
 
+var _answer_bubbles = []
+
+func _on_answers_updated(answers: Array):
+	_on_answers_cleared()
+	var count = answers.size()
+	var radius = 4.0
+	for i in count:
+		var angle = (2 * PI / count) * i - PI / 2
+		var offset = Vector2(cos(angle), sin(angle)) * radius
+
+		var bubble = Label.new()
+		bubble.text = answers[i]
+		bubble.add_theme_font_size_override("font_size", 6)
+		bubble.position = offset + Vector2(0, -5)
+		bubble.modulate.a = 0.0
+		add_child(bubble)
+
+		var tween = bubble.create_tween()
+		tween.tween_property(bubble, "modulate:a", 1.0, 0.3)
+
+		_answer_bubbles.append(bubble)
+
+func _on_answers_cleared():
+	for b in _answer_bubbles:
+		b.queue_free()
+	_answer_bubbles.clear()
+
 func _ready():
 	add_to_group("player")
 	thirsty = 100
@@ -28,6 +55,8 @@ func _ready():
 	camera.add_to_group("camera")
 	ConversationManager.conversation_started.connect(_on_conv_started)
 	ConversationManager.conversation_ended.connect(_on_conv_ended)
+	ConversationManager.answers_updated.connect(_on_answers_updated)
+	ConversationManager.conversation_ended.connect(_on_answers_cleared)
 
 const FloatingLabel = preload("res://scenes/game/player/FloatingLabel.tscn")
 

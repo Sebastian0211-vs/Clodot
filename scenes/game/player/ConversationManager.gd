@@ -10,7 +10,7 @@ var player = null
 var camera = null
 
 const DIALOGUES = {
-	0: ["Bonjour !", "Belle journée !", "Tu as vu mes clés ?", "J'aime les chats", "Sympa par ici"],
+	0: ["Bonjour !", "Belle journée !", "Tu as besoin d'argent ?", "Ne m'approche pas !", "C'était sympa, jusqu'à que t'arrives."],
 	1: ["...", "Blah blah", "Requin en peluche", "Doux et bleu", "Serre-moi fort"],
 	2: ["Ni hao !", "Ça roule ?", "T'as faim ?", "On mange quoi ?", "Bonne chance !"],
 	3: ["Jobelin !", "Sacré jobelin", "Jobelinade", "Jobelos", "Jobeline forever"],
@@ -26,11 +26,11 @@ const EXPECTED_ANSWERS = {
 		"Sympa par ici":       { "answer": "sympa",    "reward": 6  },
 	},
 	1: {
-		"...":               { "answer": "silence",  "reward": 5  },
-		"Blah blah":         { "answer": "blah",     "reward": 5  },
-		"Requin en peluche": { "answer": "requin",   "reward": 20 },
-		"Doux et bleu":      { "answer": "doux",     "reward": 10 },
-		"Serre-moi fort":    { "answer": "fort",     "reward": 15 },
+		"...":               { "answer": ["silence", "kaka"],  "reward": 5  },
+		"Blah blah":         { "answer": ["silence", "kaka"],     "reward": 5  },
+		"Requin en peluche": { "answer": ["silence", "kaka"],   "reward": 20 },
+		"Doux et bleu":      { "answer": ["silence", "kaka"],     "reward": 10 },
+		"Serre-moi fort":    { "answer": ["silence", "kaka"],     "reward": 15 },
 	},
 	2: {
 		"Ni hao !":      { "answer": "nihao",   "reward": 12 },
@@ -55,6 +55,8 @@ const EXPECTED_ANSWERS = {
 	},
 }
 
+const FAILED = ["euh...", "ok ?", "ARRÊTE DE ME SUIVRE", "Et si on arrêtait de se parler ?", "Ahah... quoi ?", "Erm..."]
+
 var _current_npc = null
 var _line_index: int = 0
 
@@ -62,7 +64,6 @@ var _line_index: int = 0
 var _spoken_buffer: String = ""
 
 func _ready() -> void:
-	# connecte le signal d'InputManager
 	InputManager.phoneme_played.connect(_on_phoneme_played)
 
 func _on_phoneme_played(label: String) -> void:
@@ -105,8 +106,10 @@ func start_conversation(pnj) -> void:
 	emit_signal("conversation_started", pnj)
 
 
-var _expected_answer: String = ""
-var _current_reward: int = 0  # ← ajoute ça
+var _expected_answers: Array = []
+var _current_reward: int = 0
+
+signal answers_updated(answers: Array)
 
 func _show_line() -> void:
 	var line = _current_npc.dialogue_lines[_line_index]
@@ -114,37 +117,43 @@ func _show_line() -> void:
 	
 	var npc_id = _current_npc.id
 	if EXPECTED_ANSWERS.has(npc_id) and EXPECTED_ANSWERS[npc_id].has(line):
-		_expected_answer = EXPECTED_ANSWERS[npc_id][line]["answer"]
+		_expected_answers = EXPECTED_ANSWERS[npc_id][line]["answer"]
 		_current_reward  = EXPECTED_ANSWERS[npc_id][line]["reward"]
+		# Collecte toutes les réponses possibles pour ce NPC
+		var all_answers = []
+		for entry in EXPECTED_ANSWERS[npc_id][line]["answer"]:
+			print(entry)
+			all_answers.append(entry)
+		answers_updated.emit(all_answers)
 	else:
-		_expected_answer = ""
+		_expected_answers = []
 		_current_reward  = 0
+		answers_updated.emit([])
 
-func check_answer(spoken_text: String) -> int:
-	if _expected_answer == "":
-		print("pas de réponse attendue pour cette ligne")
+func check_answer(spoken_text: String) -> void:
+	var foundtyping = false
+	for answer in _expected_answers:
+		if _expected_answers == []:
+			_spoken_buffer = ""
+			return 
+				
+		if answer == spoken_text.to_lower():
+			player.moneyIndicator += _current_reward
+			_spoken_buffer = ""
+			end_conversation()
+			return 
+			
+		if answer.contains(spoken_text.to_lower()):
+			foundtyping = true
+			return 
+			
+	if !foundtyping:
 		_spoken_buffer = ""
-		return 0
-	
-	print("attendu: ", _expected_answer, " | reçu: ", spoken_text.to_lower())
-	
-	if _expected_answer == spoken_text.to_lower():
-		print("Bonne réponse ! +", _current_reward, " thunes")
-		player.moneyIndicator += _current_reward
-		_spoken_buffer = ""
+		var failure = int(randi() % FAILED.size())
+		_current_npc.dialogtext.text = FAILED[failure]
+		await get_tree().create_timer(2.0).timeout
+		_current_npc._speed = _current_npc._speed * (10 + randf() * 30) 
 		end_conversation()
-		return 1
-		
-	if _expected_answer.contains(spoken_text.to_lower()):
-		print("BONNE REPONSE EN COURS HIHI BIEN OUEJ")
-		
-		return 2
-		
-	else:
-		print("Mauvaise réponse...")
-		_spoken_buffer = ""
-		end_conversation()
-		return -1
 
 func end_conversation() -> void:
 	if not in_conversation:
