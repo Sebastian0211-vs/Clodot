@@ -3,13 +3,13 @@ extends ProgressBar
 @onready var timer = $Timer
 
 var hungry = 0 : set = set_hungry
-
+const EndScreen = preload("res://scenes/end/end_screen.gd")
 func set_hungry(new_hungry):
 	hungry = min(max_value, new_hungry)
 	value = hungry
 	
 	if hungry <= 0:
-		#DEATH ?
+		EndScreen.go(InputManager)
 		return
 		
 func init_hungry(_hungry):

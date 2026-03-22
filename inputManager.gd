@@ -10,7 +10,7 @@ signal phoneme_played(phoneme: String)
 const BASE_MAP: Dictionary = {
 	# ── VOYELLES ──────────────────────────────────────────────────────────────
 	KEY_A:  { "label": "a",  "phoneme": "a",  "file": "a.wav"        },
-	KEY_E:  { "label": "e",  "phoneme": "e",  "file": "é.wav.mp3"    },
+	KEY_E:  { "label": "e",  "phoneme": "e",  "file": "é.wav"    },
 	KEY_R:  { "label": "e",  "phoneme": "ɛ",  "file": "e.wav" },
 	KEY_I:  { "label": "i",  "phoneme": "i",  "file": "i.wav"        },
 	KEY_O:  { "label": "o",  "phoneme": "o",  "file": "o.wav"        },
