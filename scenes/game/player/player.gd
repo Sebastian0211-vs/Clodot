@@ -18,10 +18,16 @@ var moneyIndicator = 0.0
 var _answer_bubbles = []
 
 
-func _on_answers_updated(answers: Array):
+func _on_answers_updated(answers: Array, panel):
 	_on_answers_cleared()
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
 	var count = answers.size()
 	var spacing = 20.0
+	var target_global_y = panel.global_position.y + panel.size.y
+
 
 	for i in count:
 		var bubble = Label.new()
@@ -29,11 +35,19 @@ func _on_answers_updated(answers: Array):
 		bubble.add_theme_font_size_override("font_size", 6)
 		bubble.modulate.a = 0.0
 		bubble.set_meta("phase", randf() * TAU)
-		bubble.position = Vector2(- (count - 1) * spacing / 2.0 + i * spacing, -20.0)
 		add_child(bubble)
 		bubble.z_index = 10
-		_answer_bubbles.append(bubble)
+		
+		# Position locale de base
+		var base_x = -(count - 1) * spacing / 2.0 + i * spacing
+		var base_y = to_local(Vector2(global_position.x, target_global_y)).y
 
+		
+		bubble.position = Vector2(base_x, base_y)
+		bubble.set_meta("base_x", base_x)
+		bubble.set_meta("base_y", base_y)
+		
+		_answer_bubbles.append(bubble)
 		var tween = bubble.create_tween()
 		tween.tween_property(bubble, "modulate:a", 1.0, 0.3)
 
@@ -133,7 +147,7 @@ func _process(delta):
 			break
 		var bubble = _answer_bubbles[i]
 		var phase = bubble.get_meta("phase")
-		bubble.position.y = -20.0 + sin(time * 1.2 + phase) * 3.0
+		bubble.position.y = bubble.get_meta("base_y") + sin(time * 1.2 + phase) * 3.0
 	if locked:
 		return
 	update_attributes(delta)

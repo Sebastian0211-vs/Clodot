@@ -1,6 +1,7 @@
 # ConversationManager.gd — Autoload
 extends Node
 
+
 signal conversation_started(pnj)
 signal conversation_ended
 
@@ -134,7 +135,7 @@ func start_conversation(pnj) -> void:
 var _expected_answers: Array = []
 var _current_reward: float = 0.0
 
-signal answers_updated(answers: Array)
+signal answers_updated(answers: Array, panel)
 
 func _show_line() -> void:
 	var line = _current_npc.dialogue_lines[_line_index]
@@ -148,11 +149,14 @@ func _show_line() -> void:
 		for entry in EXPECTED_ANSWERS[npc_id][line]["answer"]:
 			print(entry)
 			all_answers.append(entry)
-		answers_updated.emit(all_answers)
+		answers_updated.emit(all_answers, _current_npc.get_node("Dialog/PanelContainer"))
+
 	else:
 		_expected_answers = []
 		_current_reward  = 0
 		answers_updated.emit([])
+
+
 
 func check_answer(spoken_text: String) -> void:
 	var foundtyping = false
@@ -185,6 +189,8 @@ func check_answer(spoken_text: String) -> void:
 		npc.dialogtext.text = FAILED[failure]
 		await get_tree().create_timer(2.0).timeout
 		npc._speed = npc._speed * (10 + randf() * 30)
+		npc.get_node("StaticBody2D/CollisionShape2D").disabled = true
+		npc.get_node("Area2D/CollisionShape2D").disabled = true
 		end_conversation()
 
 func end_conversation() -> void:

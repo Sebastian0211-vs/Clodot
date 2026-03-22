@@ -11,11 +11,13 @@ size = Vector2(56, 62)
 size = Vector2(36, 38)
 
 [node name="Npc" type="AnimatedSprite2D" unique_id=2018850458 groups=["npc"]]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_0ax1m")
 items = Array[ExtResource("2_4yio2")]([ExtResource("3_cct0w"), ExtResource("3_cct0w"), ExtResource("3_cct0w")])
 
 [node name="Area2D" type="Area2D" parent="." unique_id=855327100]
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1378805216]
 shape = SubResource("RectangleShape2D_lmetw")

@@ -43,5 +43,5 @@ func _spawn_character() -> void:
 	var id = randi()%8
 	character.global_position = pos
 	character.camera = camera
-	add_child(character)
+	get_tree().get_root().get_node("world").add_child(character)
 	character.setup(direction, move_speed, id)

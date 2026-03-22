@@ -451,6 +451,7 @@ sprite_frames = SubResource("SpriteFrames_c3urb")
 animation = &"up"
 
 [node name="PlayerUi" parent="." unique_id=1507388174 instance=ExtResource("5_prej5")]
+z_index = 30
 offset_left = -164.0
 offset_top = -120.0
 offset_right = 262.0

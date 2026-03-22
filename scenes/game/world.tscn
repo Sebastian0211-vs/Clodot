@@ -66,6 +66,7 @@ tile_size = Vector2i(32, 16)
 sources/3 = SubResource("TileSetAtlasSource_68iyn")
 
 [node name="world" type="Node2D" unique_id=1737327194]
+y_sort_enabled = true
 script = SubResource("GDScript_g5t8f")
 
 [node name="Player" parent="." unique_id=1060798901 instance=ExtResource("2_d8brc")]
@@ -96,4 +97,5 @@ tile_set = SubResource("TileSet_vn813")
 
 [node name="spawner" parent="." unique_id=530040227 node_paths=PackedStringArray("camera") instance=ExtResource("6_q5tta")]
 z_index = 1
+y_sort_enabled = true
 camera = NodePath("../Player/Camera2D")
