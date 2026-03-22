@@ -9,7 +9,8 @@ func set_thirsty(new_thirsty):
 	value = thirsty
 	
 	if thirsty <= 0:
-		print("IL A SOIF")
+		#DEATH ?
+		return
 		
 func init_thirsty(_thirsty):
 	thirsty = _thirsty

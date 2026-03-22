@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://37uukfntblk"]
+
+[ext_resource type="PackedScene" uid="uid://eqnnrx4oj3gq" path="res://scenes/game/player/player.tscn" id="1_jin3j"]
+[ext_resource type="PackedScene" uid="uid://bsomled7twcgq" path="res://scenes/game/bots/npc.tscn" id="2_lcper"]
+
+[node name="Node2D" type="Node2D" unique_id=2135188312]
+y_sort_enabled = true
+
+[node name="Player" parent="." unique_id=1060798901 instance=ExtResource("1_jin3j")]
+y_sort_enabled = false
+
+[node name="Npc" parent="." unique_id=2018850458 instance=ExtResource("2_lcper")]
+y_sort_enabled = false

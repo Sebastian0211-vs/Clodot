@@ -165,9 +165,10 @@ func check_answer(spoken_text: String) -> void:
 			player.increaseMoney(_current_reward)
 			_spoken_buffer = ""
 			_expected_answers = []
+			var npc = _current_npc
 			await player.trigger_success()
 			var success = int(randi()%SUCCESS.size())
-			_current_npc.dialogtext.text =SUCCESS[success]
+			npc.dialogtext.text =SUCCESS[success]
 			await get_tree().create_timer(2.0).timeout
 			end_conversation()
 			return 
@@ -178,11 +179,12 @@ func check_answer(spoken_text: String) -> void:
 			
 	if !foundtyping:
 		_spoken_buffer = ""
+		var npc = _current_npc
 		await player.trigger_fail()
 		var failure = int(randi() % FAILED.size())
-		_current_npc.dialogtext.text = FAILED[failure]
+		npc.dialogtext.text = FAILED[failure]
 		await get_tree().create_timer(2.0).timeout
-		_current_npc._speed = _current_npc._speed * (10 + randf() * 30)
+		npc._speed = npc._speed * (10 + randf() * 30)
 		end_conversation()
 
 func end_conversation() -> void:
