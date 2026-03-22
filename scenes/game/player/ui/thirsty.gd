@@ -3,13 +3,14 @@ extends ProgressBar
 @onready var timer = $Timer
 
 var thirsty = 0 : set = set_thirsty
+const EndScreen = preload("res://scenes/end/end_screen.gd")
 
 func set_thirsty(new_thirsty):
 	thirsty = min(max_value, new_thirsty)
 	value = thirsty
 	
 	if thirsty <= 0:
-		#DEATH ?
+		EndScreen.go(InputManager)
 		return
 		
 func init_thirsty(_thirsty):
