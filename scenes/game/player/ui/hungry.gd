@@ -9,7 +9,8 @@ func set_hungry(new_hungry):
 	value = hungry
 	
 	if hungry <= 0:
-		print("IL A FAIM")
+		#DEATH ?
+		return
 		
 func init_hungry(_hungry):
 	hungry = _hungry

@@ -92,7 +92,7 @@ func _ready():
 	hungry = 50
 	stamina = 90
 	moneyIndicator = 0.35
-	print("Player added to group: ", get_groups(), " + ", moneyIndicator)
+	#print("Player added to group: ", get_groups(), " + ", moneyIndicator)
 	hungryBar.init_hungry(hungry)
 	staminaBar.init_stamina(stamina)
 	thirstyBar.init_thirsty(thirsty)
@@ -167,9 +167,7 @@ func _set_money(delta: float):
 	moneyBackground.text = str(moneyIndicator)
 
 func increaseMoney(value):
-	print("AUGMENTE MOULA")
 	moneyIndicator += value
-	print("POST MONEY INCREASE : ", moneyIndicator)
 
 
 enum direction{

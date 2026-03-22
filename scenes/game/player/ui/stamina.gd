@@ -9,7 +9,8 @@ func set_stamina(new_stamina):
 	value = stamina
 	
 	if stamina <= 0:
-		print("IL A BESOIN DE DROGUE")
+		#DEATH ?
+		return
 		
 func init_stamina(_stamina):
 	stamina = _stamina

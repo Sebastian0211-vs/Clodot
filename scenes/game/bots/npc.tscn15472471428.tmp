@@ -1,19 +1,14 @@
 [gd_scene format=3 uid="uid://bsomled7twcgq"]
 
 [ext_resource type="Script" uid="uid://dbjov8fuhxp5u" path="res://scenes/game/bots/npc.gd" id="1_0ax1m"]
-[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="2_4yio2"]
-[ext_resource type="Resource" uid="uid://c5x157ju5hast" path="res://Resources/TestItem.tres" id="3_cct0w"]
+[ext_resource type="SpriteFrames" uid="uid://cciph5nbx0mm3" path="res://assets/pnj/shop.tres" id="1_2nkmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmetw"]
 size = Vector2(56, 62)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yio2"]
-size = Vector2(36, 38)
-
-[node name="Npc" type="AnimatedSprite2D" unique_id=2018850458 groups=["npc"]]
-y_sort_enabled = true
+[node name="Npc" type="AnimatedSprite2D" unique_id=2018850458]
+sprite_frames = ExtResource("1_2nkmh")
 script = ExtResource("1_0ax1m")
-items = Array[ExtResource("2_4yio2")]([ExtResource("3_cct0w"), ExtResource("3_cct0w"), ExtResource("3_cct0w")])
 
 [node name="Area2D" type="Area2D" parent="." unique_id=855327100]
 
@@ -52,19 +47,19 @@ offset_right = 20.0
 offset_bottom = 9.0
 
 [node name="Label" type="Label" parent="Dialog/PanelContainer" unique_id=476647730]
-visible = false
 z_index = 12
-custom_minimum_size = Vector2(20, 30)
+custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Name" type="Label" parent="Dialog/PanelContainer" unique_id=1719976642]
+[node name="Answer1" type="Label" parent="Dialog/PanelContainer" unique_id=1687567771]
 layout_mode = 2
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=654083233]
+[node name="Answer2" type="Label" parent="Dialog/PanelContainer" unique_id=1511425554]
+layout_mode = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=199394858]
-shape = SubResource("RectangleShape2D_4yio2")
+[node name="Answer3" type="Label" parent="Dialog/PanelContainer" unique_id=993899506]
+layout_mode = 2

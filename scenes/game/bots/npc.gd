@@ -56,6 +56,19 @@ func _ready() -> void:
 	dialogtext.visible = false 
 	dialogPanel.position = dialogtext.position
 	ConversationManager.conversation_ended.connect(_on_conv_ended)
+	$Area2D.body_entered.connect(_on_body_entered)
+	$Area2D.area_entered.connect(_on_area_entered)
+
+func _on_area_entered(area: Area2D) -> void:
+	if id == 4:
+		return
+	var other = area.get_parent()
+	if other == self:
+		return
+	if other.has_method("setup") and !player_nearby:
+		var push = (global_position - other.global_position).normalized()
+		_velocity = push * _speed
+		direction = push
 
 func _shop_time():
 	Ui.open_mode(Ui.MODE.SHOP,items)

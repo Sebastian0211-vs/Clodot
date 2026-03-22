@@ -437,7 +437,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abehh"]
 size = Vector2(30, 51)
 
-[node name="Player" type="CharacterBody2D" unique_id=1060798901]
+[node name="Player" type="CharacterBody2D" unique_id=1060798901 groups=["player"]]
+y_sort_enabled = true
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_bkoau")
