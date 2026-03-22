@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b2y677x6xocbi"]
+
+[ext_resource type="Texture2D" uid="uid://cl6hhhm2fxe3n" path="res://Resources/biere.png" id="1_f5uva"]
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="1_il3gv"]
+
+[resource]
+script = ExtResource("1_il3gv")
+icon = ExtResource("1_f5uva")
+name = "Biere"
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"

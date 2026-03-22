@@ -7,7 +7,13 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @onready var textbox = $Text
 @onready var dialogtext = $Dialog/PanelContainer/Label
 @onready var dialogPanel = $Dialog/PanelContainer
-@export var items : Array[Item]
+@export var items : Array[Item] = [
+	preload("res://Resources/Item1.tres"),
+	preload("res://Resources/Item2.tres"),
+	preload("res://Resources/Item3.tres"),
+	preload("res://Resources/Item4.tres"),
+	preload("res://Resources/Item5.tres")
+]
 
 
 const DIALOGUES = {
@@ -156,9 +162,9 @@ func _on_conv_ended():
 	start = false
 	if id != 4:
 		_velocity = direction * _speed
-	#else:
-	#	_is_shopping = false
-	#	Ui.close_mode()
+	else:
+		_is_shopping = false
+		Ui.close_mode()
 	_show_textbox()
 
 func _start_discussion():

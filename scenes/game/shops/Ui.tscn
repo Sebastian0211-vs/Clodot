@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbaa46icc3nwh"]
 
-[ext_resource type="Script" path="res://scenes/game/shops/Ui.gd" id="1_k8aur"]
+[ext_resource type="Script" uid="uid://demxj5bjl7gam" path="res://scenes/game/shops/Ui.gd" id="1_k8aur"]
 [ext_resource type="Script" uid="uid://dbnjrvld7o0pg" path="res://scenes/game/shops/Manager.gd" id="2_as8rs"]
 [ext_resource type="Script" uid="uid://e4r7nai6a7wv" path="res://scenes/game/shops/Inventory.gd" id="3_w8ici"]
 [ext_resource type="PackedScene" uid="uid://fpcn0lmwd8fl" path="res://scenes/game/shops/slot.tscn" id="4_jcirm"]

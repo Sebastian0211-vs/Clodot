@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dbu8p5uhc660t"]
+
+[ext_resource type="Texture2D" uid="uid://c557q32ypb5nm" path="res://Resources/loto.png" id="1_8c18d"]
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="1_lbenf"]
+
+[resource]
+script = ExtResource("1_lbenf")
+icon = ExtResource("1_8c18d")
+name = "Billet de loto"
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"

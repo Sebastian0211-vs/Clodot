@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b4cr2hx1qf3mg"]
+
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="1_5m6mr"]
+[ext_resource type="Texture2D" uid="uid://bqn2ap5scjn8d" path="res://Resources/scooby.png" id="1_712kt"]
+
+[resource]
+script = ExtResource("1_5m6mr")
+icon = ExtResource("1_712kt")
+name = "Scooby-Snack"
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"

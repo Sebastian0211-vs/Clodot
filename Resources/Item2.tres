@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://ccueh8pqd713n"]
+
+[ext_resource type="Script" uid="uid://b2s5hhmfwi5fv" path="res://scenes/game/shops/Item.gd" id="1_4f6m8"]
+[ext_resource type="Texture2D" uid="uid://j3ey6x351lm0" path="res://Resources/cig.png" id="1_fx7sy"]
+
+[resource]
+script = ExtResource("1_4f6m8")
+icon = ExtResource("1_fx7sy")
+name = "Cigarettes"
+metadata/_custom_type_script = "uid://b2s5hhmfwi5fv"
