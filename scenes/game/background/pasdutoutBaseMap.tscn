@@ -1,10 +1,10 @@
-[gd_scene format=4 uid="uid://bkfb8sx543wem"]
+[gd_scene format=4 uid="uid://dqnakscwa14bp"]
 
-[ext_resource type="Texture2D" uid="uid://dkrf7t7l3fj6f" path="res://assets/tiles.png" id="1_20fyn"]
-[ext_resource type="Script" uid="uid://cuq0s67uthwos" path="res://scenes/game/background/BaseMap.gd" id="2_45vtv"]
+[ext_resource type="Texture2D" uid="uid://dkrf7t7l3fj6f" path="res://assets/tiles.png" id="1_g3b0c"]
+[ext_resource type="Script" uid="uid://cuq0s67uthwos" path="res://scenes/game/background/BaseMap.gd" id="2_owmwh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_brorf"]
-texture = ExtResource("1_20fyn")
+texture = ExtResource("1_g3b0c")
 texture_region_size = Vector2i(32, 16)
 0:0/0 = 0
 1:0/0 = 0
@@ -19,6 +19,6 @@ sources/1 = SubResource("TileSetAtlasSource_brorf")
 z_index = -3
 tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wAAAQAAAAAAAAD+////AQACAAAAAAD///7/AQACAAAAAAD///3/AQACAAAAAAAAAP7/AQABAAAAAAAAAP//AQABAAAAAAAAAAAAAQABAAAAAAD//wEAAQAAAAAAAAABAP7/AQABAAAAAAAAAP3/AQABAAAAAAAAAPz/AQACAAAAAAD///v/AQACAAAAAAD///z/AQACAAAAAAD+//3/AQACAAAAAAD+//7/AQACAAAAAAD9////AQAAAAAAAAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wIAAQAAAAAAAAD//wMAAQAAAAAAAAAAAAIAAQACAAAAAAAAAAEAAQACAAAAAAABAAAAAQABAAAAAAABAP//AQABAAAAAAACAAAAAQABAAAAAAABAAEAAQABAAAAAAABAAIAAQABAAAAAAAAAAMAAQABAAAAAAAAAAQAAQABAAAAAAD//wUAAQACAAAAAAD//wQAAQACAAAAAAD+/wMAAQACAAAAAAD+/wIAAQACAAAAAAD9/wEAAQACAAAAAAD9/wAAAQACAAAAAAD8////AQACAAAAAAD9//7/AQACAAAAAAD9//3/AQACAAAAAAD+//z/AQACAAAAAAD+//v/AQACAAAAAAD///r/AQACAAAAAAD///n/AQAAAAAAAAAAAPr/AQAAAAAAAAAAAPv/AQABAAAAAAABAPz/AQABAAAAAAABAP3/AQABAAAAAAACAP7/AQABAAAAAAACAP//AQABAAAAAAA=")
 tile_set = SubResource("TileSet_hh1vs")
-script = ExtResource("2_45vtv")
+script = ExtResource("2_owmwh")
 
 [node name="world" type="Node2D" parent="." unique_id=1192072035]

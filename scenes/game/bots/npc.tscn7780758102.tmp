@@ -9,6 +9,7 @@ size = Vector2(56, 62)
 [node name="Npc" type="AnimatedSprite2D" unique_id=2018850458]
 sprite_frames = ExtResource("1_2nkmh")
 script = ExtResource("1_0ax1m")
+offscreen_timeout = null
 
 [node name="Area2D" type="Area2D" parent="." unique_id=855327100]
 

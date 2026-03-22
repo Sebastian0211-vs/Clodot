@@ -5,6 +5,15 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @export var camera: Camera2D
 @export var offscreen_timeout: float = 1.5
 @onready var textbox = $Text
+@onready var dialogbox = $Dialog/Label
+
+const DIALOGUES = {
+	0: ["Bonjour !", "Belle journée !", "Tu as vu mes clés ?", "J'aime les chats", "Sympa par ici"],
+	1: ["...", "Blah blah", "Requin en peluche", "Doux et bleu", "Serre-moi fort"],
+	2: ["Ni hao !", "Ça roule ?", "T'as faim ?", "On mange quoi ?", "Bonne chance !"],
+	3: ["Jobelin !", "Sacré jobelin", "Jobelinade", "Jobelos", "Jobeline forever"],
+	4: ["Bienvenue !", "On a tout ce qu'il faut", "Bonne affaire aujourd'hui", "Revenez vite", "Soldes !"],
+}
 
 var sprites = {
 	0: "allan.tres",
@@ -31,11 +40,24 @@ func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
 	$Area2D.body_exited.connect(_on_body_exited)
 	visible = false
+	dialogbox.visible = false 
+	ConversationManager.conversation_ended.connect(_on_conv_ended)
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player_nearby = true
 		_show_textbox()
+
+func show_dialogue_line(line: String) -> void:
+	dialogbox.text = line
+	dialogbox.visible = true
+	dialogbox.modulate.a = 0.0
+	
+	var tween = create_tween()
+	tween.tween_property(dialogbox, "modulate:a", 1.0, 0.2)
+
+func hide_dialogue_bubble() -> void:
+	dialogbox.visible = false
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
@@ -84,8 +106,14 @@ func _input(event):
 			if id != 4:
 				_velocity = direction*10
 			_show_textbox()
-			ConversationManager.end_conversation()
+			ConversationManager.advance() 
 		
+
+func _on_conv_ended():  # dans le NPC
+	start = false
+	if id != 4:
+		_velocity = direction * 10
+	_show_textbox()
 
 func _start_discussion():
 	print("STARTED CONVERSATION")
@@ -100,20 +128,27 @@ func _bounce_both():
 	
 	ConversationManager.start_conversation(self)
 
+var dialogue_lines: Array = []
+var _line_index: int = 0
+
+# Dans setup(), après avoir chargé le sprite :
 func setup(dir: Vector2, velocity: float, iD) -> void:
 	id = iD
 	direction = dir.normalized()
 	_velocity = direction * velocity
 	visible = true
 
-	var path = "res://assets/pnj/"+sprites[id]
+	var pool = DIALOGUES[id].duplicate()
+	pool.shuffle()
+	dialogue_lines = pool.slice(0, 1)
 
+	var path = "res://assets/pnj/" + sprites[id]
 	var frames = load(path)
 	if frames and frames is SpriteFrames:
 		sprite_frames = frames
 		play("default")
 	if iD == 4:
-		_velocity = Vector2(0,0)
+		_velocity = Vector2(0, 0)
 
 func _update_state(delta: float) -> void:
 	var on_screen = _is_on_screen()
