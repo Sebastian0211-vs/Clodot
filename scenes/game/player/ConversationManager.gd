@@ -143,7 +143,6 @@ func check_answer(spoken_text: String) -> int:
 	else:
 		print("Mauvaise réponse...")
 		_spoken_buffer = ""
-
 		end_conversation()
 		return -1
 

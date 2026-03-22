@@ -5,7 +5,8 @@ enum State { OFFSCREEN_INITIAL, ONSCREEN, OFFSCREEN_FINAL }
 @export var camera: Camera2D
 @export var offscreen_timeout: float = 1.5
 @onready var textbox = $Text
-@onready var dialogbox = $Dialog/Label
+@onready var dialogbox = $Dialog/PanelContainer/Label
+@onready var dialogPanel = $Dialog/PanelContainer
 
 const DIALOGUES = {
 	0: ["Bonjour !", "Belle journée !", "Tu as vu mes clés ?", "J'aime les chats", "Sympa par ici"],
@@ -52,12 +53,18 @@ func show_dialogue_line(line: String) -> void:
 	dialogbox.text = line
 	dialogbox.visible = true
 	dialogbox.modulate.a = 0.0
+	dialogPanel.visible = true
+	dialogPanel.modulate.a = 0.0
+
 	
 	var tween = create_tween()
 	tween.tween_property(dialogbox, "modulate:a", 1.0, 0.2)
+	tween.tween_property(dialogPanel, "modulate:a", 1.0, 0.2)
+
 
 func hide_dialogue_bubble() -> void:
 	dialogbox.visible = false
+	dialogPanel.visible = false
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
