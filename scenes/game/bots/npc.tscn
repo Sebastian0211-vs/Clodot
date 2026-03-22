@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsomled7twcgq"]
 
 [ext_resource type="Script" uid="uid://dbjov8fuhxp5u" path="res://scenes/game/bots/npc.gd" id="1_0ax1m"]
-[ext_resource type="SpriteFrames" uid="uid://cy8rogg5adog2" path="res://assets/pnj/jobelin.tres" id="1_2nkmh"]
+[ext_resource type="SpriteFrames" uid="uid://b1iyqafimujdb" path="res://assets/pnj/blahaj.tres" id="1_2nkmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmetw"]
 size = Vector2(56, 62)

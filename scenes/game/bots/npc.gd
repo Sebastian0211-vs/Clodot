@@ -20,7 +20,7 @@ var _offscreen_timer: float = 0.0
 var textbox_tween: Tween
 var shake_time: float = 0.0
 var base_textbox_pos: Vector2
-var direction = 0.0
+var direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	add_child(textbox)
@@ -79,7 +79,7 @@ func _input(event):
 			_start_discussion()
 		elif event.keycode == KEY_SPACE and start == true:
 			start = false
-			_velocity = direction*Vector2(10.0, 10.0)
+			_velocity = direction*10
 			_show_textbox()
 			ConversationManager.end_conversation()
 		
@@ -97,8 +97,8 @@ func _bounce_both():
 	
 	ConversationManager.start_conversation(self)
 
-func setup(dir, velocity: Vector2, id) -> void:
-	direction = dir
+func setup(dir: Vector2, velocity: float, id) -> void:
+	direction = dir.normalized()
 	_velocity = direction * velocity
 	visible = true
 
