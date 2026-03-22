@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ben6kbjvpscng"]
 
-[ext_resource type="PackedScene" uid="uid://453yh6hm8dec" path="res://scenes/game/background/BaseMap.tscn" id="1_g5t8f"]
+[ext_resource type="PackedScene" uid="uid://bkfb8sx543wem" path="res://scenes/game/background/BaseMap.tscn" id="1_g5t8f"]
 [ext_resource type="PackedScene" uid="uid://eqnnrx4oj3gq" path="res://scenes/game/player/player.tscn" id="2_d8brc"]
 [ext_resource type="Script" uid="uid://ujflr214pu1y" path="res://scenes/game/background/chunk_manager.gd" id="3_d8brc"]
 [ext_resource type="Texture2D" uid="uid://50ou7lqprpev" path="res://assets/tiles2.png" id="3_w1nur"]

@@ -16,3 +16,14 @@ func remove_item(item : Item):
 			slot.item = null
 			return
 	print("Item not found")
+func use_item(item: Item):
+	if item.id == 1:
+		print("Binch! Yippi!")
+	elif item.id == 2:
+		print("Fumer tue.")
+	elif item.id == 3:
+		print("Samdvich :>")
+	elif item.id == 4:
+		print("Mmmm croquescooby!")
+	elif item.id == 5:
+		print("Lets go gambling!")

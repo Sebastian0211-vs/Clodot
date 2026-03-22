@@ -36,7 +36,9 @@ func _can_drop_data(_pos, data):
 	var destination = get_parent().name
 	
 	if data is Slot:
-		if destination == "Shop" and source == "Inventory" and not item:
+		if destination == "itemUse" and source == "Inventory" and not item:
+			return true
+		elif destination == "Shop" and source == "Inventory" and not item:
 			return true
 		elif destination == "Inventory" and source == "Shop" and not item:
 			var p = get_player()

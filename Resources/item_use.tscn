@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://6vrnjxgxqh38"]
+
+[ext_resource type="Script" uid="uid://cnrhiqocla8ne" path="res://Resources/item_use.gd" id="1_7kynn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmvs2"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="itemUse" type="PanelContainer" unique_id=60538761]
+custom_minimum_size = Vector2(20, 20)
+offset_right = 22.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cmvs2")
+script = ExtResource("1_7kynn")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=430019100]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
