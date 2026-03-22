@@ -19,10 +19,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 InvShop="*uid://baa37w5dl3xyv"
-ConversationManager="*uid://sdrw2vokkut5"
-InputManager="*uid://gkf1by0jiklb"
 Notebook="*uid://b2c0saqcsou55"
+ConversationManager="*uid://sdrw2vokkut5"
 Ui="*res://scenes/game/shops/Ui.gd"
+InputManager="*uid://gkf1by0jiklb"
 
 [display]
 

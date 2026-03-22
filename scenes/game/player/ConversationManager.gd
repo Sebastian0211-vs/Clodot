@@ -95,12 +95,12 @@ func _ready() -> void:
 func _on_phoneme_played(label: String) -> void:
 	if not in_conversation:
 		return
-	_spoken_buffer += label 
+	_spoken_buffer += label
 	check_answer(_spoken_buffer)
 	print("buffer: ", _spoken_buffer)
 
 func advance() -> void:
-	_spoken_buffer = ""  # reset le buffer
+	_spoken_buffer =""  # reset le buffer
 	_line_index += 1
 	if _line_index >= _current_npc.dialogue_lines.size():
 		end_conversation()
@@ -157,6 +157,8 @@ func _show_line() -> void:
 		answers_updated.emit([])
 
 
+func array_contains_all(main: Array, subset: Array) -> bool:
+	return subset.all(func(e): return main.has(e))
 
 func check_answer(spoken_text: String) -> void:
 	var foundtyping = false
@@ -164,10 +166,14 @@ func check_answer(spoken_text: String) -> void:
 		if _expected_answers == []:
 			_spoken_buffer = ""
 			return 
+		var phonem_answer = InputManager.decompose_to_phonemes(answer)
+		var phonem_spoken_text = InputManager.decompose_to_phonemes(spoken_text)
+		
+		print("ANSWER", phonem_answer, "SPOKEN", phonem_spoken_text)
 				
-		if answer == spoken_text.to_lower():
+		if phonem_answer == phonem_spoken_text:
 			player.increaseMoney(_current_reward)
-			_spoken_buffer = ""
+			_spoken_buffer =""
 			_expected_answers = []
 			var npc = _current_npc
 			await player.trigger_success()
@@ -177,12 +183,12 @@ func check_answer(spoken_text: String) -> void:
 			end_conversation()
 			return 
 			
-		if answer.contains(spoken_text.to_lower()):
+		if array_contains_all(phonem_answer, phonem_spoken_text):
 			foundtyping = true
 			return 
 			
 	if !foundtyping:
-		_spoken_buffer = ""
+		_spoken_buffer =""
 		var npc = _current_npc
 		await player.trigger_fail()
 		var failure = int(randi() % FAILED.size())
