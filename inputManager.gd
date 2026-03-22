@@ -8,95 +8,96 @@ const PAUSE_TOKEN    := ""
 signal phoneme_played(phoneme: String)
 
 const BASE_MAP: Dictionary = {
-	# ── VOYELLES — touches qui y ressemblent graphiquement ───────────────────
-	KEY_A:  { "label": "a",  "phoneme": "a",  "file": "2193_vignette_-a-.mp3"        },
-	KEY_E:  { "label": "e",  "phoneme": "e",  "file": "2207_vignette_-e-.mp3"        },
-	KEY_R:  { "label": "e",  "phoneme": "ɛ",  "file": "2209_vignette_-e-.mp3"        }, # e ouvert proche de e
-	KEY_I:  { "label": "i",  "phoneme": "i",  "file": "2191_vignette_-i-.mp3"        },
-	KEY_O:  { "label": "o",  "phoneme": "o",  "file": "2211_vignette_-o-ferme.mp3"   },
-	KEY_P:  { "label": "o",  "phoneme": "ɔ",  "file": "2213_vignette_-o-ouvert.mp3"  }, # o ouvert proche de o
-	KEY_U:  { "label": "ou", "phoneme": "u",  "file": "2195_vignette_-ou-.mp3"       },
-	KEY_Y:  { "label": "u",  "phoneme": "y",  "file": "2197_vignette_-u-.mp3"        }, # u français proche de u
-	KEY_W:  { "label": "wa", "phoneme": "wa", "file": "2571_vignette_-wa-.mp3"       }, # w → wa naturel
-	KEY_H:  { "label": "eu", "phoneme": "ø",  "file": "2215_vignette_-eu-ferme.mp3"  }, # central
-	KEY_J:  { "label": "eu", "phoneme": "œ",  "file": "2217_vignette_-eu-ouvert.mp3" }, # à côté de H
-
-	# ── NASALES — regroupées côté droit ──────────────────────────────────────
-	KEY_SEMICOLON: { "label": "an", "phoneme": "ɑ̃", "file": "2205_vignette_-an-_0.mp3" },
-	KEY_K:         { "label": "in", "phoneme": "ɛ̃", "file": "2201_vignette_-in-.mp3"   },
-	KEY_L:         { "label": "on", "phoneme": "ɔ̃", "file": "2203_vignette_-on-.mp3"   },
-
-	# ── CONSONNES — lettre = son ──────────────────────────────────────────────
-	KEY_B:  { "label": "b",  "phoneme": "b",  "file": "2542_vignette_-b-_0.mp3"      },
-	KEY_D:  { "label": "d",  "phoneme": "d",  "file": "2546_vignette_-d-.mp3"        },
-	KEY_F:  { "label": "f",  "phoneme": "f",  "file": "2556_vignette_-f-.mp3"        },
-	KEY_G:  { "label": "g",  "phoneme": "g",  "file": "2550_vignette_-g-.mp3"        },
-	KEY_M:  { "label": "m",  "phoneme": "m",  "file": "2552_vignette_-m-.mp3"        },
-	KEY_N:  { "label": "n",  "phoneme": "n",  "file": "2554_vignette_-n-.mp3"        },
-	KEY_V:  { "label": "v",  "phoneme": "v",  "file": "2558_vignette_-v-_0.mp3"      },
-	KEY_Z:  { "label": "z",  "phoneme": "z",  "file": "2562_vignette_-z-.mp3"        },
-	KEY_S:  { "label": "s",  "phoneme": "s",  "file": "2560_vignette_-s-.mp3"        },
-	KEY_T:  { "label": "t",  "phoneme": "t",  "file": "2544_vignette_-t-.mp3"        },
-	KEY_C:  { "label": "ch", "phoneme": "ʃ",  "file": "2564_vignette_-ch-.mp3"       }, # c → ch intuitif
-	KEY_X:  { "label": "ge", "phoneme": "ʒ",  "file": "2566_vignette_-ge-.mp3"       }, # x → son proche
-	KEY_Q:  { "label": "k",  "phoneme": "k",  "file": "2548_vignette_-k-.mp3"        }, # q → k naturel
-	KEY_1:  { "label": "l",  "phoneme": "l",  "file": "2573_vignette_-l-.mp3"      }, # ✅ L → l
-	KEY_2: { "label": "p", "phoneme": "p", "file": "2540_vignette_-p-_0.mp3"     },
-	KEY_3: { "label": "r", "phoneme": "ʁ", "file": "2575_vignette_-r-.mp3"       },
+	# ── VOYELLES ──────────────────────────────────────────────────────────────
+	KEY_A:  { "label": "a",  "phoneme": "a",  "file": "a.wav"        },
+	KEY_E:  { "label": "e",  "phoneme": "e",  "file": "é.wav.mp3"    },
+	KEY_R:  { "label": "e",  "phoneme": "ɛ",  "file": "e.wav" },
+	KEY_I:  { "label": "i",  "phoneme": "i",  "file": "i.wav"        },
+	KEY_O:  { "label": "o",  "phoneme": "o",  "file": "o.wav"        },
+	KEY_P:  { "label": "o",  "phoneme": "ɔ",  "file": "o2.wav"       },
+	KEY_U:  { "label": "ou", "phoneme": "u",  "file": "ou.wav"       },
+	KEY_Y:  { "label": "u",  "phoneme": "y",  "file": "u.wav"        },
+	KEY_W:  { "label": "wa", "phoneme": "wa", "file": "wa.wav"       },
+	KEY_H:  { "label": "eu", "phoneme": "ø",  "file": "eu.wav"       },
+	KEY_J:  { "label": "eu", "phoneme": "œ",  "file": "eu2.wav"      },
+	# ── NASALES ───────────────────────────────────────────────────────────────
+	KEY_SEMICOLON: { "label": "an", "phoneme": "ɑ̃", "file": "an.wav" },
+	KEY_K:         { "label": "in", "phoneme": "ɛ̃", "file": "in.mp3" },
+	KEY_L:         { "label": "on", "phoneme": "ɔ̃", "file": "on.wav" },
+	# ── CONSONNES ─────────────────────────────────────────────────────────────
+	KEY_B:  { "label": "b",  "phoneme": "b",  "file": "b.wav"  },
+	KEY_D:  { "label": "d",  "phoneme": "d",  "file": "d.wav"  },
+	KEY_F:  { "label": "f",  "phoneme": "f",  "file": "f.wav"  },
+	KEY_G:  { "label": "g",  "phoneme": "g",  "file": "g.mp3"  },
+	KEY_M:  { "label": "m",  "phoneme": "m",  "file": "m.wav"  },
+	KEY_N:  { "label": "n",  "phoneme": "n",  "file": "n.wav"  },
+	KEY_V:  { "label": "v",  "phoneme": "v",  "file": "v.wav"  },
+	KEY_Z:  { "label": "z",  "phoneme": "z",  "file": "z.mp3"  },
+	KEY_S:  { "label": "s",  "phoneme": "s",  "file": "s.wav"  },
+	KEY_T:  { "label": "t",  "phoneme": "t",  "file": "t.wav"  },
+	KEY_C:  { "label": "ch", "phoneme": "ʃ",  "file": "ch.wav" },
+	KEY_X:  { "label": "ge", "phoneme": "ʒ",  "file": "g2.wav" },
+	KEY_Q:  { "label": "k",  "phoneme": "k",  "file": "k.wav"  },
+	KEY_1:  { "label": "l",  "phoneme": "l",  "file": "l.wav"  },
+	KEY_2:  { "label": "p",  "phoneme": "p",  "file": "p.wav"  },
+	KEY_3:  { "label": "r",  "phoneme": "ʁ",  "file": "r.wav"  },
 }
-
-# Isolated consonant/vowel sounds
+ 
+# Isolated phoneme → file
 const PHONEME_TO_FILE: Dictionary = {
-	"i":  "2191_vignette_-i-.mp3",
-	"a":  "2193_vignette_-a-.mp3",
-	"u":  "2195_vignette_-ou-.mp3",
-	"y":  "2197_vignette_-u-.mp3",
-	"ɛ̃": "2201_vignette_-in-.mp3",
-	"ɔ̃": "2203_vignette_-on-.mp3",
-	"ɑ̃": "2205_vignette_-an-_0.mp3",
-	"e":  "2207_vignette_-e-.mp3",
-	"ɛ":  "2209_vignette_-e-.mp3",
-	"o":  "2211_vignette_-o-ferme.mp3",
-	"ɔ":  "2213_vignette_-o-ouvert.mp3",
-	"ø":  "2215_vignette_-eu-ferme.mp3",
-	"œ":  "2217_vignette_-eu-ouvert.mp3",
-	"wa": "2571_vignette_-wa-.mp3",
-	"p":  "2540_vignette_-p-_0.mp3",
-	"b":  "2542_vignette_-b-_0.mp3",
-	"t":  "2544_vignette_-t-.mp3",
-	"d":  "2546_vignette_-d-.mp3",
-	"k":  "2548_vignette_-k-.mp3",
-	"g":  "2550_vignette_-g-.mp3",
-	"m":  "2552_vignette_-m-.mp3",
-	"n":  "2554_vignette_-n-.mp3",
-	"f":  "2556_vignette_-f-.mp3",
-	"v":  "2558_vignette_-v-_0.mp3",
-	"s":  "2560_vignette_-s-.mp3",
-	"z":  "2562_vignette_-z-.mp3",
-	"ʃ":  "2564_vignette_-ch-.mp3",
-	"ʒ":  "2566_vignette_-ge-.mp3",
-	"l":  "2573_vignette_-l-.mp3",
-	"ʁ":  "2575_vignette_-r-.mp3",
+	# Voyelles
+	"i":  "i.wav",
+	"a":  "a.wav",
+	"u":  "ou.wav",
+	"y":  "u.wav",
+	"e":  "é.wav.mp3",
+	"ɛ":  "e.wav",
+	"o":  "o.wav",
+	"ɔ":  "o2.wav",
+	"ø":  "eu.wav",
+	"œ":  "eu2.wav",
+	"wa": "wa.wav",
+	# Nasales
+	"ɑ̃": "an.wav",
+	"ɛ̃": "in.wav",
+	"ɔ̃": "on.wav",
+	# Consonnes
+	"b":  "b.wav",
+	"d":  "d.wav",
+	"f":  "f.wav",
+	"g":  "g.wav",
+	"k":  "k.wav",
+	"l":  "l.wav",
+	"m":  "m.wav",
+	"n":  "n.wav",
+	"p":  "p.wav",
+	"ʁ":  "r.wav",
+	"s":  "s.wav",
+	"t":  "t.wav",
+	"v":  "v.wav",
+	"z":  "z.wav",
+	"ʃ":  "ch.wav",
+	"ʒ":  "g2.wav",
 }
-
-# Syllable file for each consonant (always the -xa- version)
+ 
+# Consonant syllable files (no syllable wavs yet → reuse consonant wav)
 const CONSONANT_SYLLABLE_FILE: Dictionary = {
-	"p":  "2539_vignette_-pa-.mp3",
-	"b":  "2541_vignette_-ba-.mp3",
-	"t":  "2543_vignette_-ta-.mp3",
-	"d":  "2545_vignette_-da-.mp3",
-	"k":  "2547_vignette_-ka-.mp3",
-	"g":  "2549_vignette_-ga-.mp3",
-	"m":  "2551_vignette_-ma-.mp3",
-	"n":  "2553_vignette_-na-.mp3",
-	"f":  "2555_vignette_-fa-.mp3",
-	"v":  "2557_vignette_-va-.mp3",
-	"s":  "2559_vignette_-sa-.mp3",
-	"z":  "2561_vignette_-za-.mp3",
-	"ʃ":  "2563_vignette_-cha-.mp3",
-	"ʒ":  "2565_vignette_-gea-.mp3",
-	"l":  "2572_vignette_-la-.mp3",
-	"ʁ":  "2574_vignette_-ra-.mp3",
+	"b":  "b.wav",
+	"d":  "d.wav",
+	"f":  "f.wav",
+	"g":  "g.wav",
+	"k":  "k.wav",
+	"l":  "l.wav",
+	"m":  "m.wav",
+	"n":  "n.wav",
+	"p":  "p.wav",
+	"ʁ":  "r.wav",
+	"s":  "s.wav",
+	"t":  "t.wav",
+	"v":  "v.wav",
+	"z":  "z.wav",
+	"ʃ":  "ch.wav",
+	"ʒ":  "g2.wav",
 }
 
 const VOWELS: Array = [
@@ -277,7 +278,7 @@ func _on_pause_timer() -> void:
 
 
 func _play_file(filename: String) -> void:
-	var path := "res://audio/" + filename
+	var path := "res://audio2/" + filename
 	var stream: AudioStream = load(path)
 	if stream == null:
 		push_warning("[InputManager] Audio not found: " + path)
